@@ -6,7 +6,6 @@ import { useReducedMotion } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import MagicAura from "@/components/effects/MagicAura";
 import { Castle } from "@/components/illustrations/CinderellaArt";
-import { useAudio } from "@/components/audio/AudioProvider";
 import styles from "@/styles/Invitation.module.css";
 
 function Corner({ className }: { className?: string }) {
@@ -26,7 +25,6 @@ let burstId = 0;
 export default function Invitation() {
   const cardRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
-  const { playSfx } = useAudio();
   const [bursts, setBursts] = useState<{ id: number; x: number; y: number }[]>([]);
 
   const onMove = (e: React.PointerEvent) => {
@@ -54,7 +52,6 @@ export default function Invitation() {
     const id = ++burstId;
     setBursts((b) => [...b, { id, x, y }]);
     setTimeout(() => setBursts((b) => b.filter((p) => p.id !== id)), 900);
-    playSfx("sparkle");
   };
 
   return (

@@ -140,6 +140,26 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     else startMusic();
   }, [playing, startMusic, stopMusic]);
 
+  // Pausa la música cuando se bloquea el cel / se oculta la pestaña, y la
+  // reanuda al volver (si estaba sonando).
+  useEffect(() => {
+    const onVisibility = () => {
+      const el = musicRef.current;
+      if (!el) return;
+      if (document.hidden) {
+        el.pause();
+      } else if (playing) {
+        el.play().catch(() => {});
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("pagehide", onVisibility);
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("pagehide", onVisibility);
+    };
+  }, [playing]);
+
   // Reproduce el efecto "shine" (con un pequeño throttle para que no se sature).
   const playSfx = useCallback(
     (type: Sfx) => {

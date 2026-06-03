@@ -7,7 +7,7 @@ import styles from "@/styles/RSVP.module.css";
 // ─────────────────────────────────────────────────────────────
 // CONFIGURA AQUÍ tu número de WhatsApp (formato internacional,
 // sin "+", sin espacios). Ej. Colombia: 57 + número.
-const WHATSAPP_NUMBER = "573001234567";
+const WHATSAPP_NUMBER = "593967358137";
 const HONOREE = "Kate Alejandra";
 // ─────────────────────────────────────────────────────────────
 
