@@ -14,6 +14,9 @@
 .DS_Store
 *.pem
 
+# claude code (config local del agente)
+/.claude
+
 # debug
 npm-debug.log*
 yarn-debug.log*

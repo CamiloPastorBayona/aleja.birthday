@@ -1,0 +1,92 @@
+.wrap {
+  position: fixed;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hint {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--text-dark);
+  background: rgba(7, 26, 48, 0.85);
+  border: 1px solid var(--glass-border);
+  padding: 7px 12px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+  animation: floatHint 2.4s ease-in-out infinite;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes floatHint {
+  0%, 100% { transform: translateX(0); opacity: 0.95; }
+  50% { transform: translateX(-4px); opacity: 1; }
+}
+
+.btn {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(240,217,122,0.25), transparent 60%),
+    rgba(7, 26, 48, 0.7);
+  backdrop-filter: blur(10px);
+  color: var(--gold-light);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 0 0 rgba(212,175,55,0.5), 0 10px 28px rgba(0,0,0,0.45);
+  transition: transform 0.25s var(--ease-out), box-shadow 0.3s;
+}
+
+.btn:hover { transform: scale(1.08); }
+.btn:active { transform: scale(0.94); }
+
+.btn.on {
+  animation: ring 2.4s ease-out infinite;
+}
+
+@keyframes ring {
+  0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.5), 0 10px 28px rgba(0,0,0,0.45); }
+  70% { box-shadow: 0 0 0 16px rgba(212,175,55,0), 0 10px 28px rgba(0,0,0,0.45); }
+  100% { box-shadow: 0 0 0 0 rgba(212,175,55,0), 0 10px 28px rgba(0,0,0,0.45); }
+}
+
+.note {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* Ecualizador: visible solo cuando suena */
+.eq {
+  position: absolute;
+  display: none;
+  gap: 3px;
+  align-items: flex-end;
+  height: 20px;
+}
+.btn.on .eq { display: flex; }
+.btn.on .note { display: none; }
+
+.eq i {
+  width: 3.5px;
+  background: var(--gold-light);
+  border-radius: 2px;
+  animation: bar 0.9s ease-in-out infinite;
+}
+.eq i:nth-child(1) { height: 8px; animation-delay: 0s; }
+.eq i:nth-child(2) { height: 18px; animation-delay: 0.2s; }
+.eq i:nth-child(3) { height: 12px; animation-delay: 0.4s; }
+.eq i:nth-child(4) { height: 16px; animation-delay: 0.1s; }
+
+@keyframes bar {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}

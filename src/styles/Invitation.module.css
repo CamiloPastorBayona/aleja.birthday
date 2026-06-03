@@ -1,87 +1,190 @@
 .section {
   position: relative;
-  z-index: 1;
-  padding: 6rem 1.5rem;
-  background: linear-gradient(180deg, #d6eef8 0%, #eef7fc 100%);
+  padding: clamp(4rem, 12vh, 8rem) 1.25rem;
   display: flex;
   justify-content: center;
 }
 
+.cardWrap {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  perspective: 1200px;
+}
+
+/* Aura de luces alrededor de la tarjeta */
+.aura {
+  position: absolute;
+  inset: -16%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Tarjeta con marco dorado ancho ── */
 .card {
   position: relative;
-  max-width: 680px;
-  width: 100%;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(212,175,55,0.3);
-  border-radius: 2px;
-  padding: 4rem 3rem;
+  z-index: 1;
+  padding: clamp(2.6rem, 7vw, 3.8rem) clamp(1.6rem, 6vw, 3rem);
   text-align: center;
+  border-radius: 26px;
+  overflow: hidden;
+  /* Borde dorado ancho con degradado (técnica padding-box / border-box) */
+  border: 3px solid transparent;
+  background:
+    linear-gradient(rgba(8, 26, 46, 0.62), rgba(8, 26, 46, 0.62)) padding-box,
+    linear-gradient(135deg, #f6e7a8, #d4af37 38%, #b8860b 68%, #f0d97a) border-box;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
   box-shadow:
-    0 4px 32px rgba(91,175,214,0.15),
-    0 0 0 6px rgba(168,216,234,0.2),
-    0 0 0 12px rgba(212,175,55,0.08);
+    0 26px 70px -24px rgba(0, 0, 0, 0.7),
+    0 0 50px rgba(212, 175, 55, 0.14);
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.4s;
+  cursor: pointer;
+}
+.card:hover {
+  box-shadow:
+    0 30px 80px -22px rgba(0, 0, 0, 0.75),
+    0 0 70px rgba(212, 175, 55, 0.26);
 }
 
-/* Ornamental corners */
-.cornerTL, .cornerTR, .cornerBL, .cornerBR {
+/* Marco interior fino */
+.frame {
   position: absolute;
-  width: 48px;
-  height: 48px;
-  border-color: var(--gold);
-  border-style: solid;
+  inset: 12px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 18px;
+  pointer-events: none;
 }
-.cornerTL { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
-.cornerTR { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
-.cornerBL { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
-.cornerBR { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+
+/* Ornamentos de esquina */
+.corner {
+  position: absolute;
+  width: clamp(34px, 8vw, 46px);
+  height: clamp(34px, 8vw, 46px);
+  z-index: 3;
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.4));
+  pointer-events: none;
+}
+.tl { top: 16px; left: 16px; }
+.tr { top: 16px; right: 16px; transform: rotate(90deg); }
+.br { bottom: 16px; right: 16px; transform: rotate(180deg); }
+.bl { bottom: 16px; left: 16px; transform: rotate(270deg); }
+
+/* Ilustraciones */
+.castle {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: clamp(110px, 28vw, 170px);
+  opacity: 0.16;
+  pointer-events: none;
+}
+.tiara {
+  width: clamp(70px, 18vw, 100px);
+  margin: 0 auto 0.6rem;
+  display: block;
+  filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.55));
+  animation: floatT 5s ease-in-out infinite;
+}
+@keyframes floatT {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
 
 .greeting {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
+  margin-top: 0.8rem;
+  font-size: clamp(1.05rem, 3vw, 1.3rem);
   color: var(--text-mid);
   font-style: italic;
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.05em;
 }
 
 .body {
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  color: var(--text-mid);
+  margin: 1.1rem 0;
+  font-size: clamp(1rem, 2.6vw, 1.2rem);
   line-height: 1.8;
-  margin-bottom: 1.5rem;
+  color: var(--text-soft);
 }
 
 .highlight {
-  font-family: var(--font-script);
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
-  color: var(--celeste-deep);
-  line-height: 1.3;
-  margin: 1.5rem 0;
+  margin: 1.4rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
-
-.highlight span {
-  color: var(--gold);
-  display: block;
-  font-size: clamp(2.2rem, 6vw, 3.5rem);
+.xv {
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: clamp(0.85rem, 2.4vw, 1.05rem);
+  color: var(--text-soft);
+}
+.who {
+  font-family: var(--font-script), cursive;
+  font-size: clamp(2rem, 7vw, 3.2rem);
+  line-height: 1.3;
+  padding: 0.08em 0.18em 0.18em;
+  filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.35));
 }
 
 .signature {
-  margin-top: 2rem;
-  font-family: var(--font-serif);
-  color: var(--text-mid);
-  font-size: 1rem;
+  margin-top: 0.5rem;
+  color: var(--text-soft);
+}
+.signature p:first-child {
   font-style: italic;
+  font-size: 1.05rem;
 }
-
 .family {
-  font-family: var(--font-script);
-  font-size: 1.8rem;
-  color: var(--celeste-deep);
-  margin-top: 0.25rem;
+  font-family: var(--font-script), cursive;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  line-height: 1.3;
+  padding-bottom: 0.12em;
+  color: var(--gold-light);
+  text-shadow: 0 0 18px rgba(212, 175, 55, 0.4);
+  margin-top: 0.3rem;
 }
 
-@media (max-width: 600px) {
-  .card { padding: 3rem 1.5rem; }
+.hint {
+  position: absolute;
+  bottom: 12px;
+  right: 18px;
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-size: 0.72rem;
+  color: rgba(240, 217, 122, 0.8);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.card:hover .hint { opacity: 1; }
+
+/* Estallido de brillos al tocar */
+.burst {
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.burst i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  margin: -3px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff7e0, #f0d97a 60%, transparent 70%);
+  transform: rotate(var(--a)) translateX(0);
+  animation: spark 0.85s ease-out forwards;
+}
+@keyframes spark {
+  0% { opacity: 1; transform: rotate(var(--a)) translateX(0) scale(1); }
+  100% { opacity: 0; transform: rotate(var(--a)) translateX(70px) scale(0.2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tiara, .burst i { animation: none; }
 }

@@ -1,52 +1,95 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import Scene3DLazy from "@/components/three/Scene3DLazy";
+import Crown3DLazy from "@/components/three/Crown3DLazy";
+import { Carriage, GlassSlipper } from "@/components/illustrations/CinderellaArt";
 import styles from "@/styles/Hero.module.css";
 
 export default function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  // Parallax: el contenido sube y se desvanece al hacer scroll.
+  const y = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
+
   return (
-    <section className={styles.hero}>
-      <div className={styles.overlay} />
+    <section ref={ref} className={styles.hero}>
+      {/* Fondo 3D (three.js con carga diferida) */}
+      <Scene3DLazy />
+      <div className={styles.vignette} aria-hidden />
 
-      {/* Carriage SVG decorative */}
-      <div className={styles.carriageWrap} aria-hidden>
-        <svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg" className={styles.carriage}>
-          {/* wheels */}
-          <circle cx="85" cy="145" r="28" stroke="#d4af37" strokeWidth="3" fill="none"/>
-          <circle cx="85" cy="145" r="18" stroke="#d4af37" strokeWidth="1.5" fill="none" strokeDasharray="4 4"/>
-          <circle cx="85" cy="145" r="5" fill="#d4af37"/>
-          <circle cx="235" cy="145" r="28" stroke="#d4af37" strokeWidth="3" fill="none"/>
-          <circle cx="235" cy="145" r="18" stroke="#d4af37" strokeWidth="1.5" fill="none" strokeDasharray="4 4"/>
-          <circle cx="235" cy="145" r="5" fill="#d4af37"/>
-          {/* carriage body */}
-          <path d="M55 115 Q60 60 160 55 Q260 60 265 115 Q270 140 160 142 Q50 140 55 115Z"
-            fill="rgba(168,216,234,0.25)" stroke="#d4af37" strokeWidth="2"/>
-          {/* windows */}
-          <ellipse cx="120" cy="100" rx="22" ry="26" fill="rgba(168,216,234,0.4)" stroke="#d4af37" strokeWidth="1.5"/>
-          <ellipse cx="200" cy="100" rx="22" ry="26" fill="rgba(168,216,234,0.4)" stroke="#d4af37" strokeWidth="1.5"/>
-          {/* door */}
-          <path d="M148 78 Q160 72 172 78 L176 125 Q160 130 144 125 Z"
-            fill="rgba(168,216,234,0.3)" stroke="#d4af37" strokeWidth="1.5"/>
-          {/* top crown */}
-          <path d="M130 58 L140 42 L160 52 L180 42 L190 58" stroke="#d4af37" strokeWidth="2" fill="none"/>
-          <circle cx="140" cy="42" r="4" fill="#d4af37"/>
-          <circle cx="160" cy="50" r="5" fill="#d4af37"/>
-          <circle cx="180" cy="42" r="4" fill="#d4af37"/>
-          {/* shaft */}
-          <line x1="55" y1="135" x2="10" y2="140" stroke="#d4af37" strokeWidth="2"/>
-        </svg>
-      </div>
+      {/* Corona 3D arriba (three.js) + ilustraciones flotantes */}
+      <Crown3DLazy className={styles.crown} />
+      <Carriage className={styles.carriage} aria-hidden />
+      <GlassSlipper className={styles.slipper} aria-hidden />
 
-      <div className={styles.content}>
-        <p className={styles.subtitle}>Mis</p>
-        <h1 className={styles.title}>XV Años</h1>
-        <div className={styles.divider}>
+      <motion.div className={styles.content} style={{ y, opacity, scale }}>
+        <motion.p
+          className={`eyebrow ${styles.eyebrow}`}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.2 }}
+        >
+          Te invito a celebrar
+        </motion.p>
+
+        <motion.h1
+          className={styles.title}
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <span className={styles.mis}>Mis</span>
+          <span className={`${styles.xv} gold-text`}>XV</span>
+          <span className={styles.anos}>Años</span>
+        </motion.h1>
+
+        <motion.div
+          className={styles.divider}
+          aria-hidden
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={{ opacity: 1, scaleX: 1 }}
+          transition={{ duration: 1, delay: 0.7 }}
+        >
           <span>✦</span><span>✦</span><span>✦</span>
-        </div>
-        <p className={styles.name}>Kate Alejandra</p>
-        <p className={styles.lastname}>Reyes Tutillo</p>
-        <p className={styles.date}>6 · Febrero · 2027</p>
-      </div>
+        </motion.div>
+
+        <motion.p
+          className={styles.name}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.8 }}
+        >
+          Kate Alejandra
+        </motion.p>
+        <motion.p
+          className={styles.lastname}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, delay: 1 }}
+        >
+          Reyes Tutillo
+        </motion.p>
+
+        <motion.p
+          className={styles.date}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 1.15 }}
+        >
+          06 · Febrero · 2027
+        </motion.p>
+      </motion.div>
 
       <div className={styles.scrollHint} aria-hidden>
-        <span>↓</span>
+        <span className={styles.scrollText}>Desliza</span>
+        <span className={styles.scrollArrow}>↓</span>
       </div>
     </section>
   );

@@ -5,18 +5,36 @@
 }
 
 :root {
+  /* Celeste / azul profundo */
   --celeste: #a8d8ea;
   --celeste-light: #d6eef8;
   --celeste-dark: #5bafd6;
   --celeste-deep: #2e86c1;
+  --midnight: #071a30;
+  --midnight-2: #0c2a47;
+  --midnight-3: #103a63;
+
+  /* Dorado */
   --gold: #d4af37;
   --gold-light: #f0d97a;
+  --gold-glow: rgba(212, 175, 55, 0.55);
+
   --white: #ffffff;
-  --off-white: #f9f6ff;
-  --text-dark: #1a2a3a;
-  --text-mid: #3a5068;
+  --off-white: #f4f9ff;
+  --text-dark: #eaf4ff;
+  --text-mid: #b9d4ea;
+  --text-soft: rgba(234, 244, 255, 0.72);
+
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(168, 216, 234, 0.28);
+  --glass-shadow: 0 20px 60px -20px rgba(4, 18, 38, 0.8);
+
   --font-script: var(--font-script);
   --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html {
@@ -24,13 +42,97 @@ html {
 }
 
 body {
-  background-color: var(--off-white);
+  /* Fondo único y homogéneo para todo el sitio (sin cortes entre secciones).
+     Un degradado vertical muy suave + un resplandor tenue arriba al centro. */
+  background:
+    radial-gradient(120% 70% at 50% -15%, rgba(46, 134, 193, 0.16), transparent 55%),
+    linear-gradient(180deg, #061528 0%, #07203a 45%, #061a30 100%);
+  background-attachment: fixed;
+  background-color: #061528;
   color: var(--text-dark);
   font-family: var(--font-serif), Georgia, serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Tipografías utilitarias ── */
+.font-script { font-family: var(--font-script), cursive; }
+.font-serif { font-family: var(--font-serif), Georgia, serif; }
+.font-sans { font-family: var(--font-sans), system-ui, sans-serif; }
+
+/* Etiqueta "high-tech" con kerning amplio */
+.eyebrow {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  font-size: clamp(0.65rem, 1.6vw, 0.8rem);
+  color: var(--gold-light);
+}
+
+/* Texto con degradado dorado */
+.gold-text {
+  background: linear-gradient(120deg, #f7e9a8 0%, #d4af37 45%, #f0d97a 70%, #b8860b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Tarjeta glassmorphism reutilizable ── */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Línea divisoria dorada con destello central */
+.divider-gold {
+  height: 1px;
+  width: min(280px, 70%);
+  margin: 1.5rem auto;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  position: relative;
+}
+.divider-gold::after {
+  content: "✦";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--gold-light);
+  font-size: 0.85rem;
+  background: var(--midnight, #071a30);
+  padding: 0 0.6rem;
+  text-shadow: 0 0 12px var(--gold-glow);
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--celeste-light); }
-::-webkit-scrollbar-thumb { background: var(--celeste-dark); border-radius: 3px; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #061626; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--celeste-dark), var(--gold));
+  border-radius: 4px;
+}
+
+::selection {
+  background: rgba(212, 175, 55, 0.35);
+  color: #fff;
+}
+
+/* Respeta usuarios con movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useAudio } from "@/components/audio/AudioProvider";
 import styles from "@/styles/RSVP.module.css";
 
 // ─────────────────────────────────────────────────────────────
@@ -15,6 +16,7 @@ function waLink(message: string) {
 
 export default function RSVP() {
   const [guests, setGuests] = useState(1);
+  const { playSfx } = useAudio();
 
   const confirmMsg =
     `¡Hola! Confirmo mi asistencia a los XV años de ${HONOREE} 🩵\n` +
@@ -26,9 +28,10 @@ export default function RSVP() {
 
   return (
     <section className={styles.section} id="rsvp">
-      <div className={styles.inner}>
+      <div className={`glass ${styles.inner}`}>
         <span className={styles.envelope}>💌</span>
-        <h2 className={styles.heading}>Confirma tu asistencia</h2>
+        <p className="eyebrow">Confirma tu lugar</p>
+        <h2 className={`${styles.heading} gold-text`}>¿Nos acompañas?</h2>
         <p className={styles.text}>
           Tu presencia es el mejor regalo. Ayúdanos a preparar cada detalle
           confirmando si nos acompañarás en esta noche tan especial.
@@ -41,7 +44,10 @@ export default function RSVP() {
               type="button"
               className={styles.counterBtn}
               aria-label="Quitar un asistente"
-              onClick={() => setGuests((g) => Math.max(1, g - 1))}
+              onClick={() => {
+                playSfx("hover");
+                setGuests((g) => Math.max(1, g - 1));
+              }}
             >
               −
             </button>
@@ -50,7 +56,10 @@ export default function RSVP() {
               type="button"
               className={styles.counterBtn}
               aria-label="Agregar un asistente"
-              onClick={() => setGuests((g) => Math.min(20, g + 1))}
+              onClick={() => {
+                playSfx("hover");
+                setGuests((g) => Math.min(20, g + 1));
+              }}
             >
               +
             </button>
@@ -63,6 +72,8 @@ export default function RSVP() {
             href={waLink(confirmMsg)}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => playSfx("sparkle")}
+            onMouseEnter={() => playSfx("hover")}
           >
             ✓ Confirmar por WhatsApp
           </a>
@@ -71,23 +82,23 @@ export default function RSVP() {
             href={waLink(declineMsg)}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => playSfx("click")}
           >
             No podré asistir
           </a>
         </div>
 
-        <div className={styles.divider}>✦ ✦ ✦</div>
+        <div className="divider-gold" />
 
         <p className={styles.giftTitle}>Lluvia de sobres</p>
-        <p className={styles.confirm}>
-          Si deseas hacernos llegar un detalle, agradecemos tu generosidad
-          con mucho cariño en una lluvia de sobres.
+        <p className={styles.text}>
+          Si deseas hacernos llegar un detalle, agradecemos tu generosidad con
+          mucho cariño en una lluvia de sobres.
         </p>
 
         <p className={styles.closing}>
           Su compañía hará de esta celebración un momento inolvidable para
-          nuestra familia. ¡Esperamos contar con su presencia y disfrutar
-          juntos de esta ocasión tan especial!
+          nuestra familia. ¡Esperamos contar con su presencia!
         </p>
       </div>
     </section>

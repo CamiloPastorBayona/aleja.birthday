@@ -1,0 +1,80 @@
+.section {
+  position: relative;
+  /* Alto generoso para dar recorrido al storytelling */
+  height: 320vh;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+/* Marco dorado tenue que enmarca la escena */
+.frame {
+  position: absolute;
+  inset: clamp(16px, 4vw, 40px);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  border-radius: 18px;
+  pointer-events: none;
+}
+.frame::before,
+.frame::after {
+  content: "✦";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--gold);
+  font-size: 0.8rem;
+  text-shadow: 0 0 10px var(--gold-glow);
+}
+.frame::before { top: -0.55rem; background: #061528; padding: 0 0.5rem; }
+.frame::after { bottom: -0.55rem; background: #07203a; padding: 0 0.5rem; }
+
+.beat {
+  grid-area: 1 / 1;
+  max-width: 22ch;
+  margin: 0 auto;
+  text-align: center;
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 300;
+  font-size: clamp(1.7rem, 6vw, 3.2rem);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: var(--text-dark);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+  will-change: opacity, transform, filter;
+}
+
+.beat.gold {
+  font-style: italic;
+  background: linear-gradient(120deg, #f7e9a8, #d4af37 55%, #f0d97a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 22px rgba(212, 175, 55, 0.3));
+}
+
+.barTrack {
+  position: absolute;
+  bottom: clamp(28px, 7vh, 56px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(220px, 50%);
+  height: 2px;
+  background: rgba(168, 216, 234, 0.18);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.bar {
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--celeste-dark), var(--gold));
+  border-radius: 2px;
+}
