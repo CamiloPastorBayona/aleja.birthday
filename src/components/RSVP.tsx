@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import { useAudio } from "@/components/audio/AudioProvider";
 import styles from "@/styles/RSVP.module.css";
 
@@ -29,7 +30,9 @@ export default function RSVP() {
   return (
     <section className={styles.section} id="rsvp">
       <div className={`glass ${styles.inner}`}>
-        <span className={styles.envelope}>💌</span>
+        <div className={styles.slipper} aria-hidden>
+          <Image src="/images/zapatilla.png" alt="" fill sizes="160px" style={{ objectFit: "contain" }} />
+        </div>
         <p className="eyebrow">Confirma tu lugar</p>
         <h2 className={`${styles.heading} gold-text`}>¿Nos acompañas?</h2>
         <p className={styles.text}>

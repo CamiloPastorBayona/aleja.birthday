@@ -1,7 +1,41 @@
 .footer {
   position: relative;
   text-align: center;
-  padding: clamp(4rem, 12vh, 7rem) 1.5rem clamp(3rem, 8vh, 5rem);
+  min-height: clamp(460px, 84vh, 760px);
+  padding: clamp(5rem, 14vh, 9rem) 1.5rem clamp(1.6rem, 4vh, 2.6rem);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* Castillo de fondo, grande y anclado abajo (base recortada) con parallax */
+.castleWrap {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(165%, 1220px);
+  height: clamp(360px, 66vh, 620px);
+  opacity: 0.42;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 28%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 28%);
+}
+/* Capa interior más alta para tener margen de movimiento (parallax) */
+.castleInner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -16%;
+  height: 132%;
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
 }
 
 /* Línea dorada decorativa muy fina, sin bloque de color que corte el fondo. */

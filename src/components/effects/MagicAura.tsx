@@ -48,6 +48,7 @@ export default function MagicAura({
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     let w = 0, h = 0, raf = 0, b = 0;
+    let visible = true;
     let orbits: Orbit[] = [];
     let comets: Comet[] = [];
 
@@ -88,6 +89,7 @@ export default function MagicAura({
     };
 
     const draw = () => {
+      if (!visible) { raf = 0; return; }
       const target = boostRef.current ? 1 : 0;
       b += (target - b) * 0.06;
       const speedK = 1 + b * 2.4;
@@ -139,6 +141,17 @@ export default function MagicAura({
     resize();
     const ro = new ResizeObserver(resize);
     ro.observe(parent);
+
+    // Pausa el bucle cuando el efecto sale de la pantalla (ahorra recursos).
+    const io = new IntersectionObserver(
+      ([e]) => {
+        visible = e.isIntersecting;
+        if (visible && !reduced && raf === 0) raf = requestAnimationFrame(draw);
+      },
+      { threshold: 0 }
+    );
+    io.observe(parent);
+
     if (!reduced) raf = requestAnimationFrame(draw);
     else {
       // un cuadro estático
@@ -156,6 +169,7 @@ export default function MagicAura({
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
+      io.disconnect();
     };
   }, [scale, density]);
 

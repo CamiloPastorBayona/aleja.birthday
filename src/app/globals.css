@@ -69,9 +69,9 @@ main {
 .eyebrow {
   font-family: var(--font-sans), system-ui, sans-serif;
   font-weight: 500;
-  letter-spacing: 0.42em;
+  letter-spacing: 0.4em;
   text-transform: uppercase;
-  font-size: clamp(0.65rem, 1.6vw, 0.8rem);
+  font-size: clamp(0.74rem, 2vw, 0.92rem);
   color: var(--gold-light);
 }
 

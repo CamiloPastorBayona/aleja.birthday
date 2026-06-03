@@ -142,7 +142,7 @@ export default function Crown3D() {
   return (
     <Canvas
       camera={{ position: [0, 0.35, 3.6], fov: 42 }}
-      dpr={[1, 2]}
+      dpr={[1, 1.5]}
       gl={{ antialias: true, alpha: true }}
       style={{ pointerEvents: "none" }}
     >

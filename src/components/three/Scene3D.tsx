@@ -33,7 +33,7 @@ function useRoundTexture() {
   }, []);
 }
 
-function Dust({ count = 600 }: { count?: number }) {
+function Dust({ count = 420 }: { count?: number }) {
   const ref = useRef<THREE.Points>(null);
   const tex = useRoundTexture();
 
@@ -84,50 +84,6 @@ function Dust({ count = 600 }: { count?: number }) {
   );
 }
 
-function Crystal() {
-  const ref = useRef<THREE.Group>(null);
-
-  // Gema dodecaedro: aristas limpias (no triangulación) = se ve perfecta.
-  const { geo, edges } = useMemo(() => {
-    const geo = new THREE.DodecahedronGeometry(1.85, 0);
-    const edges = new THREE.EdgesGeometry(geo);
-    return { geo, edges };
-  }, []);
-
-  useFrame((state, delta) => {
-    if (!ref.current) return;
-    ref.current.rotation.y += delta * 0.14;
-    ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.25) * 0.12;
-  });
-
-  return (
-    // Retraído (z negativo) y al fondo, opacidad global ~60%.
-    <group ref={ref} position={[0, 0, -2]}>
-      {/* núcleo de cristal translúcido y brillante */}
-      <mesh geometry={geo} scale={0.99}>
-        <meshStandardMaterial
-          color="#7cc3e6"
-          emissive="#2e86c1"
-          emissiveIntensity={0.45}
-          transparent
-          opacity={0.14}
-          roughness={0.05}
-          metalness={0.4}
-        />
-      </mesh>
-      {/* aristas doradas finas */}
-      <lineSegments geometry={edges}>
-        <lineBasicMaterial color="#d4af37" transparent opacity={0.45} />
-      </lineSegments>
-      {/* destello interior */}
-      <mesh scale={0.35}>
-        <icosahedronGeometry args={[1, 0]} />
-        <meshBasicMaterial color="#f0d97a" transparent opacity={0.25} />
-      </mesh>
-    </group>
-  );
-}
-
 function Rig() {
   useFrame((state) => {
     // Parallax muy sutil para que no se sienta "desfasado".
@@ -152,7 +108,6 @@ export default function Scene3D() {
       <ambientLight intensity={0.6} />
       <pointLight position={[5, 5, 5]} intensity={1.1} color="#f0d97a" />
       <pointLight position={[-5, -3, 2]} intensity={0.7} color="#5bafd6" />
-      <Crystal />
       <Dust />
       <Rig />
     </Canvas>

@@ -1,64 +1,60 @@
 "use client";
 
 /**
- * Decide si vale la pena cargar el fondo 3D (three.js).
- *  • En móviles de gama baja, con "ahorro de datos" o "menos movimiento",
- *    NO se carga three.js: se muestra un resplandor CSS liviano.
- *  • Si el equipo aguanta, three.js se importa de forma diferida tras el
- *    primer render (requestIdleCallback) para no bloquear la carga.
+ * Decide si vale la pena cargar el fondo 3D (three.js) y lo monta SOLO mientras
+ * el Hero está en pantalla (lo desmonta al hacer scroll para liberar GPU/CPU).
+ *  • En móviles de gama baja / "ahorro de datos" / "menos movimiento" NO se
+ *    carga: se muestra un resplandor CSS liviano.
  */
 
-import { useEffect, useState, type ComponentType } from "react";
+import { useEffect, useRef, useState, type ComponentType } from "react";
 
 let Scene3D: ComponentType | null = null;
 
 export default function Scene3DLazy() {
   const [Comp, setComp] = useState<ComponentType | null>(null);
   const [decided, setDecided] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const nav = navigator as Navigator & {
       deviceMemory?: number;
       connection?: { saveData?: boolean };
     };
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const lowMem = (nav.deviceMemory ?? 4) <= 2;
     const lowCpu = (navigator.hardwareConcurrency ?? 4) <= 4;
     const saveData = nav.connection?.saveData === true;
     const tinyScreen = Math.min(window.innerWidth, window.innerHeight) < 360;
 
     setDecided(true);
+    if (reduced || saveData || tinyScreen || (lowMem && lowCpu)) return;
 
-    if (reduced || saveData || tinyScreen || (lowMem && lowCpu)) {
-      return; // se queda con el fallback CSS
-    }
+    const el = ref.current;
+    if (!el) return;
 
-    const load = () => {
-      if (Scene3D) {
-        setComp(() => Scene3D!);
-        return;
-      }
-      import("./Scene3D").then((mod) => {
-        Scene3D = mod.default;
-        setComp(() => mod.default);
+    const mount = () => {
+      if (Scene3D) return setComp(() => Scene3D!);
+      import("./Scene3D").then((m) => {
+        Scene3D = m.default;
+        setComp(() => m.default);
       });
     };
 
-    const idle =
-      (window as unknown as {
-        requestIdleCallback?: (cb: () => void) => number;
-      }).requestIdleCallback;
-    if (idle) idle(load);
-    else setTimeout(load, 600);
+    // Monta el 3D solo cuando el Hero está (cerca de) visible.
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) mount();
+        else setComp(null); // desmonta al salir de pantalla
+      },
+      { rootMargin: "150px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
   return (
-    <div
-      aria-hidden
-      style={{ position: "absolute", inset: 0, zIndex: 0 }}
-    >
+    <div ref={ref} aria-hidden style={{ position: "absolute", inset: 0, zIndex: 0 }}>
       {Comp ? <Comp /> : <CssFallback fade={decided} />}
     </div>
   );

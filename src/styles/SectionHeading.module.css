@@ -14,7 +14,7 @@
 .subtitle {
   margin-top: 0.5rem;
   font-family: var(--font-serif), serif;
-  font-size: clamp(1rem, 2.6vw, 1.2rem);
+  font-size: clamp(1.15rem, 3vw, 1.4rem);
   color: var(--text-soft);
   font-style: italic;
 }

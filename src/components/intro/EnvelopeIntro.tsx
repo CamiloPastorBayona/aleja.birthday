@@ -66,9 +66,9 @@ export default function EnvelopeIntro() {
             }}
           >
             <div className={styles.envelopeArea}>
-              {/* Polvo de hadas girando alrededor (luces grandes y notorias) */}
+              {/* Polvo de hadas girando alrededor (muy sutil) */}
               <div className={styles.magic} aria-hidden>
-                <MagicAura boost={open} scale={1.7} density={1.25} />
+                <MagicAura boost={open} scale={0.7} density={0.4} />
               </div>
 
               <div className={styles.envelope}>

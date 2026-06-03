@@ -36,8 +36,27 @@
 .frame::before { top: -0.55rem; background: #061528; padding: 0 0.5rem; }
 .frame::after { bottom: -0.55rem; background: #07203a; padding: 0 0.5rem; }
 
+/* Carrusel abajo (móvil y PC), sobre la barra de progreso */
+.carousel {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: clamp(70px, 16vh, 120px);
+  width: min(69vw, 345px);
+  aspect-ratio: 3 / 2;
+  z-index: 1;
+  pointer-events: none;
+  /* funde su fondo cálido con el entorno navy */
+  mix-blend-mode: screen;
+  opacity: 0.92;
+  -webkit-mask-image: radial-gradient(70% 70% at 50% 55%, #000 45%, transparent 80%);
+  mask-image: radial-gradient(70% 70% at 50% 55%, #000 45%, transparent 80%);
+}
+
 .beat {
   grid-area: 1 / 1;
+  position: relative;
+  z-index: 2;
   max-width: 22ch;
   margin: 0 auto;
   text-align: center;

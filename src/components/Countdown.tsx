@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { MidnightClock } from "@/components/illustrations/CinderellaArt";
+import Image from "next/image";
 import styles from "@/styles/Countdown.module.css";
 
 const TARGET = new Date("2027-02-06T20:00:00");
@@ -36,7 +36,9 @@ export default function Countdown() {
 
   return (
     <section className={styles.section} id="cuenta-regresiva">
-      <MidnightClock className={styles.clock} aria-hidden />
+      <div className={styles.clock} aria-hidden>
+        <Image src="/images/reloj.png" alt="" fill sizes="(max-width:600px) 36vw, 180px" style={{ objectFit: "contain" }} />
+      </div>
 
       <p className="eyebrow" style={{ textAlign: "center" }}>
         La magia comienza en

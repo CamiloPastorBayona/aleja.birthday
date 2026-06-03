@@ -144,70 +144,77 @@ export function Carriage({ className, ...rest }: Art) {
   );
 }
 
-/* Zapatilla de cristal — tacón alto de perfil, con facetas y lazo */
+/* Zapatilla de cristal — tacón alto (court shoe) de perfil */
 export function GlassSlipper({ className, ...rest }: Art) {
   return (
-    <svg viewBox="0 0 220 170" fill="none" className={className} {...rest}>
+    <svg viewBox="0 0 200 140" fill="none" className={className} {...rest}>
       <defs>
-        <linearGradient id="slip" x1="0" y1="0" x2="0.4" y2="1">
-          <stop offset="0%" stopColor="rgba(245,252,255,0.85)" />
-          <stop offset="45%" stopColor="rgba(168,216,234,0.5)" />
-          <stop offset="100%" stopColor="rgba(91,175,214,0.32)" />
+        <linearGradient id="slip" x1="0" y1="0" x2="0.3" y2="1">
+          <stop offset="0%" stopColor="rgba(247,253,255,0.9)" />
+          <stop offset="42%" stopColor="rgba(180,224,240,0.55)" />
+          <stop offset="100%" stopColor="rgba(91,175,214,0.34)" />
         </linearGradient>
-        <linearGradient id="slipGold" x1="0" y1="0" x2="1" y2="0">
+        <linearGradient id="slipGold" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor={GOLD_L} />
           <stop offset="100%" stopColor={GOLD} />
         </linearGradient>
       </defs>
 
       {/* sombra en el piso */}
-      <ellipse cx="106" cy="153" rx="82" ry="7" fill="rgba(212,175,55,0.16)" />
+      <ellipse cx="98" cy="120" rx="80" ry="6" fill="rgba(212,175,55,0.15)" />
 
       {/* tacón de aguja */}
       <path
-        d="M160 122 C168 132 178 142 184 150 C186 152 182 154.5 178 151 C170 143 159 132 149 124 Z"
+        d="M150 92 C160 102 172 112 182 118 C184 119.5 181 122 177 119.5
+           C168 113 156 104 146 98 C146 95 148 92 150 92 Z"
         fill="url(#slip)"
         stroke="url(#slipGold)"
         strokeWidth={1.8}
         strokeLinejoin="round"
       />
 
-      {/* cuerpo del zapato (vamp + escote abierto + contrafuerte) */}
+      {/* cuerpo del zapato (court shoe) */}
       <path
-        d="M28 128
-           C24 108 42 90 70 84
-           C96 79 110 92 122 104
-           C134 96 152 100 168 112
-           C172 116 170 122 162 123
-           C140 122 92 126 56 128
-           C44 129 34 131 28 128 Z"
+        d="M22 104
+           C20 76 40 64 66 64
+           C112 64 138 56 170 70
+           C178 74 176 90 168 96
+           C124 110 74 108 52 108
+           C40 108 28 108 22 104 Z"
         fill="url(#slip)"
         stroke="url(#slipGold)"
         strokeWidth={2.2}
         strokeLinejoin="round"
       />
 
-      {/* línea del escote (abertura del pie) */}
-      <path d="M70 86 C96 80 110 92 122 102" stroke="url(#slipGold)" strokeWidth={1.2} fill="none" opacity={0.7} />
+      {/* escote (abertura del pie) */}
+      <path
+        d="M70 66 C104 60 134 62 166 74"
+        stroke="url(#slipGold)"
+        strokeWidth={1.4}
+        fill="none"
+        opacity={0.75}
+      />
+      <ellipse cx="116" cy="70" rx="46" ry="7" fill="rgba(7,26,48,0.28)" transform="rotate(-6 116 70)" />
+
       {/* suela */}
-      <path d="M30 129 C64 138 112 138 150 127" stroke="url(#slipGold)" strokeWidth={1} fill="none" opacity={0.6} />
+      <path d="M24 104 C70 114 130 110 168 96" stroke="url(#slipGold)" strokeWidth={1} fill="none" opacity={0.55} />
 
       {/* facetas de cristal */}
-      <path d="M40 116 L64 90 L70 120 Z" fill="rgba(255,255,255,0.16)" />
-      <path d="M70 120 L92 92 L112 108 Z" fill="rgba(127,208,239,0.16)" />
-      <path d="M122 104 L150 104 L150 124 Z" fill="rgba(255,255,255,0.12)" />
+      <path d="M34 96 L58 70 L66 100 Z" fill="rgba(255,255,255,0.16)" />
+      <path d="M66 100 L92 70 L112 92 Z" fill="rgba(127,208,239,0.16)" />
 
       {/* lazo en el empeine */}
       <g>
-        <path d="M118 96 Q106 88 98 96 Q106 102 118 98 Z" fill="rgba(255,255,255,0.45)" stroke="url(#slipGold)" strokeWidth={1.1} />
-        <path d="M118 96 Q130 88 138 96 Q130 102 118 98 Z" fill="rgba(255,255,255,0.45)" stroke="url(#slipGold)" strokeWidth={1.1} />
-        <circle cx="118" cy="97" r="3.2" fill={GOLD_L} stroke="url(#slipGold)" strokeWidth={0.8} />
+        <path d="M86 72 Q74 64 66 72 Q74 78 86 74 Z" fill="rgba(255,255,255,0.5)" stroke="url(#slipGold)" strokeWidth={1.1} />
+        <path d="M86 72 Q98 64 106 72 Q98 78 86 74 Z" fill="rgba(255,255,255,0.5)" stroke="url(#slipGold)" strokeWidth={1.1} />
+        <circle cx="86" cy="73" r="3" fill={GOLD_L} stroke="url(#slipGold)" strokeWidth={0.8} />
       </g>
 
       {/* brillo */}
-      <ellipse cx="66" cy="106" rx="13" ry="6" fill="rgba(255,255,255,0.55)" transform="rotate(-24 66 106)" />
+      <ellipse cx="56" cy="86" rx="12" ry="6" fill="rgba(255,255,255,0.55)" transform="rotate(-22 56 86)" />
 
-      <Twinkles points={[[150, 70, 5], [44, 78, 4], [184, 120, 3.6], [110, 140, 3]]} />
+      <Twinkles points={[[150, 52, 5], [40, 60, 4], [184, 96, 3.4], [104, 118, 3]]} />
     </svg>
   );
 }

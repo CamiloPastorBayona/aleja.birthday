@@ -6,16 +6,17 @@
 }
 
 .clock {
-  width: clamp(80px, 18vw, 120px);
-  margin: 0 auto 1rem;
-  display: block;
-  filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.5));
-  animation: sway 4s ease-in-out infinite;
+  position: relative;
+  width: clamp(110px, 28vw, 168px);
+  aspect-ratio: 360 / 643;
+  margin: 0 auto 1.2rem;
+  filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.3));
+  animation: floatClock 5s ease-in-out infinite;
 }
 
-@keyframes sway {
-  0%, 100% { transform: rotate(-2deg); }
-  50% { transform: rotate(2deg); }
+@keyframes floatClock {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
 }
 
 .heading {
@@ -29,7 +30,7 @@
 .sub {
   color: var(--text-soft);
   font-style: italic;
-  font-size: clamp(0.95rem, 2.6vw, 1.15rem);
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
   margin-bottom: clamp(1.8rem, 5vh, 2.6rem);
 }
 

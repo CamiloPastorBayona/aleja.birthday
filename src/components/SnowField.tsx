@@ -162,7 +162,9 @@ export default function SnowField() {
     };
 
     const makeFlakes = () => {
-      const count = Math.min(110, Math.round((w * h) / 18000));
+      // Densidad reducida (mejor rendimiento), aún más baja en móvil.
+      const small = Math.min(w, h) < 540;
+      const count = Math.min(small ? 46 : 78, Math.round((w * h) / 26000));
       flakes = Array.from({ length: count }, () => spawn(true));
     };
 

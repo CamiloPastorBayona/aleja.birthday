@@ -81,11 +81,20 @@
   opacity: 0.16;
   pointer-events: none;
 }
-.tiara {
-  width: clamp(70px, 18vw, 100px);
-  margin: 0 auto 0.6rem;
-  display: block;
-  filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.55));
+/* Camafeo circular con la cara de Cenicienta */
+.cameo {
+  position: relative;
+  width: clamp(104px, 26vw, 140px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 0.7rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--gold);
+  background: radial-gradient(circle at 50% 35%, rgba(168, 216, 234, 0.3), rgba(7, 26, 48, 0.7));
+  box-shadow:
+    0 0 0 5px rgba(212, 175, 55, 0.16),
+    0 10px 26px rgba(0, 0, 0, 0.45),
+    0 0 26px rgba(212, 175, 55, 0.3);
   animation: floatT 5s ease-in-out infinite;
 }
 @keyframes floatT {
@@ -95,14 +104,14 @@
 
 .greeting {
   margin-top: 0.8rem;
-  font-size: clamp(1.05rem, 3vw, 1.3rem);
+  font-size: clamp(1.2rem, 3.4vw, 1.5rem);
   color: var(--text-mid);
   font-style: italic;
 }
 
 .body {
-  margin: 1.1rem 0;
-  font-size: clamp(1rem, 2.6vw, 1.2rem);
+  margin: 1.2rem 0;
+  font-size: clamp(1.18rem, 3.2vw, 1.45rem);
   line-height: 1.8;
   color: var(--text-soft);
 }
@@ -118,7 +127,7 @@
   font-weight: 300;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-size: clamp(0.85rem, 2.4vw, 1.05rem);
+  font-size: clamp(0.95rem, 2.8vw, 1.2rem);
   color: var(--text-soft);
 }
 .who {

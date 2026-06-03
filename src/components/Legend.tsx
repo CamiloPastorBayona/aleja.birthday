@@ -8,6 +8,7 @@
  */
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import styles from "@/styles/Legend.module.css";
 
@@ -80,6 +81,10 @@ export default function Legend() {
     <section ref={ref} className={styles.section} aria-label="Una pequeña historia">
       <div className={styles.sticky}>
         <div className={styles.frame} aria-hidden />
+        {/* Carrusel abajo (móvil y PC) */}
+        <div className={styles.carousel} aria-hidden>
+          <Image src="/images/carrusel.png" alt="" fill sizes="(max-width:720px) 69vw, 345px" style={{ objectFit: "contain", objectPosition: "bottom center" }} />
+        </div>
         {beats.map((b, i) => (
           <Beat
             key={i}

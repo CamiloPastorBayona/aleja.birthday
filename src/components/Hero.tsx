@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import Scene3DLazy from "@/components/three/Scene3DLazy";
 import Crown3DLazy from "@/components/three/Crown3DLazy";
-import { Carriage, GlassSlipper } from "@/components/illustrations/CinderellaArt";
 import styles from "@/styles/Hero.module.css";
 
 export default function Hero() {
@@ -13,23 +13,58 @@ export default function Hero() {
     target: ref,
     offset: ["start start", "end start"],
   });
-  // Parallax: el contenido sube y se desvanece al hacer scroll.
-  const y = useTransform(scrollYProgress, [0, 1], [0, -120]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
+
+  // Suavizado tipo "Apple": el scroll se sigue con inercia para un movimiento
+  // premium y con peso (no brusco).
+  const smooth = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 28,
+    mass: 0.5,
+  });
+
+  // El contenido sube bastante y se desvanece (capa más cercana = más rápida).
+  const y = useTransform(smooth, [0, 1], ["0%", "-46%"]);
+  const opacity = useTransform(smooth, [0, 0.75], [1, 0]);
+  const scale = useTransform(smooth, [0, 1], [1, 0.88]);
+  const blur = useTransform(smooth, [0, 0.8], [0, 6]);
+  const contentFilter = useTransform(blur, (b) => `blur(${b}px)`);
+
+  // El castillo (capa lejana) se mueve poco y hace un zoom muy sutil → profundidad.
+  const castleY = useTransform(smooth, [0, 1], ["0%", "-14%"]);
+  const castleScale = useTransform(smooth, [0, 1], [1, 1.12]);
+  const castleOpacity = useTransform(smooth, [0, 0.9], [0.72, 0.3]);
 
   return (
     <section ref={ref} className={styles.hero}>
+      {/* Castillo de fondo completo (capa lejana) con parallax */}
+      <motion.div
+        className={styles.castleBg}
+        style={{ y: castleY, scale: castleScale, opacity: castleOpacity }}
+        aria-hidden
+      >
+        <Image
+          src="/images/castillo-hero.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          style={{
+            objectFit: "contain",
+            objectPosition: "center bottom",
+            filter: "saturate(0.7) brightness(0.9)",
+          }}
+        />
+      </motion.div>
+      <div className={styles.castleTint} aria-hidden />
+
       {/* Fondo 3D (three.js con carga diferida) */}
       <Scene3DLazy />
       <div className={styles.vignette} aria-hidden />
 
-      {/* Corona 3D arriba (three.js) + ilustraciones flotantes */}
+      {/* Corona 3D arriba (three.js) */}
       <Crown3DLazy className={styles.crown} />
-      <Carriage className={styles.carriage} aria-hidden />
-      <GlassSlipper className={styles.slipper} aria-hidden />
 
-      <motion.div className={styles.content} style={{ y, opacity, scale }}>
+      <motion.div className={styles.content} style={{ y, opacity, scale, filter: contentFilter }}>
         <motion.p
           className={`eyebrow ${styles.eyebrow}`}
           initial={{ opacity: 0, y: 16 }}
@@ -86,11 +121,6 @@ export default function Hero() {
           06 · Febrero · 2027
         </motion.p>
       </motion.div>
-
-      <div className={styles.scrollHint} aria-hidden>
-        <span className={styles.scrollText}>Desliza</span>
-        <span className={styles.scrollArrow}>↓</span>
-      </div>
     </section>
   );
 }

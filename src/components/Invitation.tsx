@@ -1,10 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import MagicAura from "@/components/effects/MagicAura";
-import { Castle, Tiara } from "@/components/illustrations/CinderellaArt";
+import { Castle } from "@/components/illustrations/CinderellaArt";
 import { useAudio } from "@/components/audio/AudioProvider";
 import styles from "@/styles/Invitation.module.css";
 
@@ -78,14 +79,15 @@ export default function Invitation() {
           <Corner className={`${styles.corner} ${styles.bl}`} />
 
           <Castle className={styles.castle} aria-hidden />
-          <Tiara className={styles.tiara} aria-hidden />
+          <div className={styles.cameo} aria-hidden>
+            <Image src="/images/cara.png" alt="" fill sizes="150px" style={{ objectFit: "cover", objectPosition: "top center" }} />
+          </div>
 
-          <p className="eyebrow">Una noche de ensueño</p>
+          <p className="eyebrow">Nuestra invitación</p>
           <p className={styles.greeting}>Estimados familiares y amigos:</p>
 
           <p className={styles.body}>
-            Con el corazón lleno de alegría, los invitamos a ser parte de un
-            momento mágico que soñamos durante mucho tiempo: la celebración de los
+            Tenemos el honor de invitarlos a celebrar los
           </p>
 
           <h2 className={styles.highlight}>
@@ -95,16 +97,11 @@ export default function Invitation() {
             </span>
           </h2>
 
-          <p className={styles.body}>
-            Una noche escrita como un cuento de hadas, con luces, música y
-            recuerdos que deseamos vivir junto a quienes más amamos.
-          </p>
-
           <div className="divider-gold" />
 
           <div className={styles.signature}>
-            <p>Con todo nuestro cariño,</p>
-            <p className={styles.family}>Familia Reyes 💖</p>
+            <p>Con cariño,</p>
+            <p className={styles.family}>Familia Reyes Tutillo</p>
           </div>
 
           <span className={styles.hint} aria-hidden>✦ tócame</span>

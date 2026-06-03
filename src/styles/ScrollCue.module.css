@@ -1,0 +1,61 @@
+.cue {
+  position: fixed;
+  left: 50%;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px 6px;
+  border-radius: 999px;
+  background: rgba(7, 26, 48, 0.5);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.cue.hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(16px);
+}
+
+.text {
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+  color: var(--gold-light);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+/* Doble chevron animado hacia abajo */
+.chev {
+  position: relative;
+  width: 18px;
+  height: 14px;
+}
+.chev i {
+  position: absolute;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  border-right: 1.6px solid var(--gold-light);
+  border-bottom: 1.6px solid var(--gold-light);
+  transform: translateX(-50%) rotate(45deg);
+  animation: chev 1.6s ease-in-out infinite;
+}
+.chev i:nth-child(1) { top: 0; animation-delay: 0s; opacity: 0.9; }
+.chev i:nth-child(2) { top: 5px; animation-delay: 0.2s; opacity: 0.5; }
+
+@keyframes chev {
+  0%, 100% { transform: translateX(-50%) translateY(0) rotate(45deg); opacity: 0.4; }
+  50% { transform: translateX(-50%) translateY(3px) rotate(45deg); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chev i { animation: none; }
+}
