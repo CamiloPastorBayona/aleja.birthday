@@ -35,20 +35,20 @@ function InfoPage({
   );
 }
 
-/* Una hoja que se voltea (con cara frontal, reverso y sombra de pliegue) */
+/* Una hoja que se voltea (giro horizontal, con sombra de pliegue) */
 function Leaf({
-  rotateY,
+  rotate,
   z,
   front,
 }: {
-  rotateY: MotionValue<number>;
+  rotate: MotionValue<number>;
   z: number;
   front: ReactNode;
 }) {
-  const opacity = useTransform(rotateY, [-118, -160], [1, 0.12]);
-  const curl = useTransform(rotateY, [0, -85, -160], [0, 0.55, 0.08]);
+  const opacity = useTransform(rotate, [-118, -160], [1, 0.12]);
+  const curl = useTransform(rotate, [0, -85, -160], [0, 0.55, 0.08]);
   return (
-    <motion.div className={styles.leaf} style={{ rotateY, opacity, zIndex: z }}>
+    <motion.div className={styles.leaf} style={{ rotateY: rotate, opacity, zIndex: z }}>
       <div className={styles.front}>
         {front}
         <motion.div className={styles.curl} style={{ opacity: curl }} aria-hidden />
@@ -92,11 +92,11 @@ export default function EventBook() {
           </div>
 
           {/* Hojas que se voltean (de la más abajo a la portada) */}
-          <Leaf rotateY={ry3} z={37} front={<InfoPage label="Lugar" value="Salón Azul" sub="Te esperamos" />} />
-          <Leaf rotateY={ry2} z={38} front={<InfoPage label="Recepción" value="8:00 p. m." sub="Puntualidad mágica" />} />
-          <Leaf rotateY={ry1} z={39} front={<InfoPage label="Fecha" value="6 de febrero, 2027" sub="Sábado" />} />
+          <Leaf rotate={ry3} z={37} front={<InfoPage label="Lugar" value="Salón Azul" sub="Te esperamos" />} />
+          <Leaf rotate={ry2} z={38} front={<InfoPage label="Recepción" value="8:00 p. m." sub="Puntualidad mágica" />} />
+          <Leaf rotate={ry1} z={39} front={<InfoPage label="Fecha" value="6 de febrero, 2027" sub="Sábado" />} />
           <Leaf
-            rotateY={ry0}
+            rotate={ry0}
             z={40}
             front={
               <div className={styles.cover}>

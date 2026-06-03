@@ -18,7 +18,7 @@
 /* Libro (perspectiva aquí para poder recortar el overflow en .sticky) */
 .book {
   position: relative;
-  width: min(82vw, 400px);
+  width: min(90vw, 450px);
   aspect-ratio: 3 / 4;
   perspective: 2400px;
   transform-style: preserve-3d;

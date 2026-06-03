@@ -39,6 +39,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* clip recorta el desbordamiento horizontal SIN crear contenedor de scroll
+     (a diferencia de hidden), así no rompe position: sticky */
+  overflow-x: clip;
 }
 
 body {
@@ -51,7 +54,7 @@ body {
   background-color: #061528;
   color: var(--text-dark);
   font-family: var(--font-serif), Georgia, serif;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 
