@@ -40,7 +40,7 @@ function Dust({ count = 420 }: { count?: number }) {
   const { positions, colors } = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
-    const gold = new THREE.Color("#f0d97a");
+    const gold = new THREE.Color("#dde4ef");
     const blue = new THREE.Color("#bfe3f5");
     for (let i = 0; i < count; i++) {
       const r = 4 + Math.random() * 9;
@@ -106,7 +106,7 @@ export default function Scene3D() {
     >
       <fog attach="fog" args={["#061528", 8, 18]} />
       <ambientLight intensity={0.6} />
-      <pointLight position={[5, 5, 5]} intensity={1.1} color="#f0d97a" />
+      <pointLight position={[5, 5, 5]} intensity={1.1} color="#dde4ef" />
       <pointLight position={[-5, -3, 2]} intensity={0.7} color="#5bafd6" />
       <Dust />
       <Rig />

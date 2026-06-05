@@ -11,11 +11,11 @@ import styles from "@/styles/Invitation.module.css";
 function Corner({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 64 64" fill="none" aria-hidden>
-      <path d="M6 32 C6 17 17 6 32 6" stroke="#d4af37" strokeWidth="2" strokeLinecap="round" />
-      <path d="M14 32 C14 23 23 14 32 14" stroke="#f0d97a" strokeWidth="1.1" strokeLinecap="round" opacity="0.7" />
-      <path d="M6 32 q8 0 11 -7 q3 7 -4 11 q-4 2 -7 -4" stroke="#d4af37" strokeWidth="1.2" fill="none" />
-      <circle cx="32" cy="6" r="2.2" fill="#f0d97a" />
-      <circle cx="6" cy="32" r="2.2" fill="#f0d97a" />
+      <path d="M6 32 C6 17 17 6 32 6" stroke="#aab3c3" strokeWidth="2" strokeLinecap="round" />
+      <path d="M14 32 C14 23 23 14 32 14" stroke="#dde4ef" strokeWidth="1.1" strokeLinecap="round" opacity="0.7" />
+      <path d="M6 32 q8 0 11 -7 q3 7 -4 11 q-4 2 -7 -4" stroke="#aab3c3" strokeWidth="1.2" fill="none" />
+      <circle cx="32" cy="6" r="2.2" fill="#dde4ef" />
+      <circle cx="6" cy="32" r="2.2" fill="#dde4ef" />
     </svg>
   );
 }
@@ -81,10 +81,12 @@ export default function Invitation() {
           </div>
 
           <p className="eyebrow">Nuestra invitación</p>
-          <p className={styles.greeting}>Estimados familiares y amigos:</p>
+          <p className={styles.greeting}>
+            José Luis Reyes y Raiza Tutillo
+          </p>
 
           <p className={styles.body}>
-            Tenemos el honor de invitarlos a celebrar los
+            Tenemos el honor de invitarte a celebrar los
           </p>
 
           <h2 className={styles.highlight}>
@@ -96,10 +98,10 @@ export default function Invitation() {
 
           <div className="divider-gold" />
 
-          <div className={styles.signature}>
-            <p>Con cariño,</p>
-            <p className={styles.family}>Familia Reyes Tutillo</p>
-          </div>
+          <p className={styles.closing}>
+            Será una noche llena de emociones, música y recuerdos que deseamos
+            vivir junto a ti.
+          </p>
 
           <span className={styles.hint} aria-hidden>✦ tócame</span>
 

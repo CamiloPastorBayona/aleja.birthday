@@ -34,7 +34,7 @@ function makeSnowflakeSprite(px: number, gold: boolean): HTMLCanvasElement {
   const R = px * 0.42;
 
   const main = gold ? "rgba(244, 226, 150, 0.95)" : "rgba(238, 248, 255, 0.95)";
-  const glow = gold ? "rgba(240, 217, 122, 0.9)" : "rgba(206, 232, 250, 0.9)";
+  const glow = gold ? "rgba(221, 228, 239, 0.9)" : "rgba(206, 232, 250, 0.9)";
 
   ctx.translate(cx, cy);
   ctx.strokeStyle = main;
@@ -100,7 +100,7 @@ function makeGlintSprite(px: number, gold: boolean): HTMLCanvasElement {
   c.height = px;
   const ctx = c.getContext("2d")!;
   const g = ctx.createRadialGradient(px / 2, px / 2, 0, px / 2, px / 2, px / 2);
-  const col = gold ? "240, 217, 122" : "232, 245, 255";
+  const col = gold ? "221, 228, 239" : "232, 245, 255";
   g.addColorStop(0, `rgba(${col}, 0.95)`);
   g.addColorStop(0.4, `rgba(${col}, 0.5)`);
   g.addColorStop(1, `rgba(${col}, 0)`);

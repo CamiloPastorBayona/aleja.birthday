@@ -102,9 +102,9 @@ export default function EnvelopeIntro() {
                         <stop offset="60%" stopColor="rgba(168,216,234,0)" />
                       </radialGradient>
                       <linearGradient id="envGold" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stopColor="#f6e7a8" />
-                        <stop offset="50%" stopColor="#d4af37" />
-                        <stop offset="100%" stopColor="#b8860b" />
+                        <stop offset="0%" stopColor="#eef2f8" />
+                        <stop offset="50%" stopColor="#aab3c3" />
+                        <stop offset="100%" stopColor="#8c96a7" />
                       </linearGradient>
                     </defs>
 
@@ -142,8 +142,8 @@ export default function EnvelopeIntro() {
                         <stop offset="100%" stopColor="#0d2e4a" />
                       </linearGradient>
                       <linearGradient id="flapGold" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stopColor="#f6e7a8" />
-                        <stop offset="100%" stopColor="#b8860b" />
+                        <stop offset="0%" stopColor="#eef2f8" />
+                        <stop offset="100%" stopColor="#8c96a7" />
                       </linearGradient>
                     </defs>
                     <path d="M3 3 L437 3 L220 170 Z" fill="url(#flapBody)" stroke="url(#flapGold)" strokeWidth="2.5" />
@@ -169,25 +169,25 @@ export default function EnvelopeIntro() {
                     <defs>
                       <radialGradient id="wax" cx="38%" cy="32%" r="72%">
                         <stop offset="0%" stopColor="#f6e6a0" />
-                        <stop offset="42%" stopColor="#e0c25a" />
-                        <stop offset="78%" stopColor="#c69b25" />
-                        <stop offset="100%" stopColor="#9c7715" />
+                        <stop offset="42%" stopColor="#c3cbd9" />
+                        <stop offset="78%" stopColor="#97a1b3" />
+                        <stop offset="100%" stopColor="#79839a" />
                       </radialGradient>
                       <linearGradient id="crown" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#fbeeb0" />
-                        <stop offset="100%" stopColor="#9c7715" />
+                        <stop offset="0%" stopColor="#eef2f8" />
+                        <stop offset="100%" stopColor="#79839a" />
                       </linearGradient>
                     </defs>
                     {/* cera (forma orgánica) */}
                     <path
                       d="M50 3 C63 3 70 11 77 21 C83 29 97 34 97 50 C97 65 85 70 80 79 C74 88 64 97 50 97 C36 97 27 88 21 80 C15 71 3 65 3 50 C3 35 16 30 21 21 C27 11 37 3 50 3 Z"
                       fill="url(#wax)"
-                      stroke="#7c5e10"
+                      stroke="#626c84"
                       strokeWidth="1"
                     />
                     {/* anillo repujado */}
-                    <circle cx="50" cy="50" r="37" fill="none" stroke="#8a6a12" strokeWidth="2" opacity="0.6" />
-                    <circle cx="50" cy="50" r="34" fill="none" stroke="#fbeeb0" strokeWidth="0.8" opacity="0.5" />
+                    <circle cx="50" cy="50" r="37" fill="none" stroke="#6f7990" strokeWidth="2" opacity="0.6" />
+                    <circle cx="50" cy="50" r="34" fill="none" stroke="#eef2f8" strokeWidth="0.8" opacity="0.5" />
                     {/* perlas del anillo */}
                     {Array.from({ length: 24 }).map((_, i) => {
                       const a = (i / 24) * Math.PI * 2;
@@ -197,21 +197,21 @@ export default function EnvelopeIntro() {
                           cx={50 + Math.cos(a) * 40}
                           cy={50 + Math.sin(a) * 40}
                           r={1}
-                          fill="#8a6a12"
+                          fill="#6f7990"
                           opacity="0.55"
                         />
                       );
                     })}
                     {/* corona repujada */}
                     <g>
-                      <path d="M33 60 L40 41 L50 53 L60 41 L67 60 Z" fill="url(#crown)" stroke="#7c5e10" strokeWidth="0.8" />
-                      <rect x="33" y="60" width="34" height="6" rx="2" fill="url(#crown)" stroke="#7c5e10" strokeWidth="0.8" />
-                      <circle cx="40" cy="41" r="2.4" fill="#fbeeb0" stroke="#7c5e10" strokeWidth="0.5" />
-                      <circle cx="50" cy="38" r="2.8" fill="#fbeeb0" stroke="#7c5e10" strokeWidth="0.5" />
-                      <circle cx="60" cy="41" r="2.4" fill="#fbeeb0" stroke="#7c5e10" strokeWidth="0.5" />
-                      <circle cx="50" cy="63" r="2" fill="#7c5e10" opacity="0.7" />
+                      <path d="M33 60 L40 41 L50 53 L60 41 L67 60 Z" fill="url(#crown)" stroke="#626c84" strokeWidth="0.8" />
+                      <rect x="33" y="60" width="34" height="6" rx="2" fill="url(#crown)" stroke="#626c84" strokeWidth="0.8" />
+                      <circle cx="40" cy="41" r="2.4" fill="#eef2f8" stroke="#626c84" strokeWidth="0.5" />
+                      <circle cx="50" cy="38" r="2.8" fill="#eef2f8" stroke="#626c84" strokeWidth="0.5" />
+                      <circle cx="60" cy="41" r="2.4" fill="#eef2f8" stroke="#626c84" strokeWidth="0.5" />
+                      <circle cx="50" cy="63" r="2" fill="#626c84" opacity="0.7" />
                       {/* brillo superior */}
-                      <path d="M35 44 q15 -8 30 0" stroke="#fff7e0" strokeWidth="0.8" fill="none" opacity="0.5" />
+                      <path d="M35 44 q15 -8 30 0" stroke="#f6f9ff" strokeWidth="0.8" fill="none" opacity="0.5" />
                     </g>
                   </svg>
                 </motion.div>

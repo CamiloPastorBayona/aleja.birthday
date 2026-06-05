@@ -8,7 +8,7 @@
   font-size: clamp(2.4rem, 8vw, 4rem);
   line-height: 1.35;
   padding: 0.12em 0.18em 0.22em;
-  filter: drop-shadow(0 0 22px rgba(212, 175, 55, 0.3));
+  filter: drop-shadow(0 0 22px rgba(170, 179, 195, 0.3));
 }
 
 .subtitle {

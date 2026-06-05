@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Legend from "@/components/Legend";
 import Invitation from "@/components/Invitation";
 import EventBook from "@/components/EventBook";
+import Location from "@/components/Location";
 import Countdown from "@/components/Countdown";
 import RSVP from "@/components/RSVP";
 import Footer from "@/components/Footer";
@@ -17,6 +18,7 @@ export default function Home() {
       <Legend />
       <Invitation />
       <EventBook />
+      <Location />
       <Countdown />
       <RSVP />
       <Footer />

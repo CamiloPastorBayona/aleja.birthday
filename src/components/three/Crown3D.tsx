@@ -11,8 +11,8 @@ import { useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-const GOLD = "#d4af37";
-const GOLD_HI = "#f6e7a8";
+const GOLD = "#aab3c3";
+const GOLD_HI = "#eef2f8";
 const GEM = "#7fd0ef";
 
 function GoldMat(props: { roughness?: number; emissive?: string }) {
@@ -21,7 +21,7 @@ function GoldMat(props: { roughness?: number; emissive?: string }) {
       color={GOLD}
       metalness={0.95}
       roughness={props.roughness ?? 0.28}
-      emissive={props.emissive ?? "#3a2c05"}
+      emissive={props.emissive ?? "#2b3148"}
       emissiveIntensity={0.35}
     />
   );
@@ -80,7 +80,7 @@ function CrownModel() {
           color={GOLD}
           metalness={0.95}
           roughness={0.3}
-          emissive="#3a2c05"
+          emissive="#2b3148"
           emissiveIntensity={0.35}
           side={THREE.DoubleSide}
         />
@@ -114,7 +114,7 @@ function CrownModel() {
                 color={GOLD_HI}
                 metalness={0.95}
                 roughness={0.2}
-                emissive="#4a3a10"
+                emissive="#3a4258"
                 emissiveIntensity={0.4}
               />
             </mesh>
@@ -131,7 +131,7 @@ function CrownModel() {
       {spikes.map(({ x, z }, i) => (
         <mesh key={`p${i}`} position={[x * 1.02, -0.25, z * 1.02]}>
           <sphereGeometry args={[0.045, 12, 12]} />
-          <meshStandardMaterial color="#fff7e0" metalness={0.2} roughness={0.4} />
+          <meshStandardMaterial color="#f6f9ff" metalness={0.2} roughness={0.4} />
         </mesh>
       ))}
     </group>
@@ -149,7 +149,7 @@ export default function Crown3D() {
       <ambientLight intensity={0.55} />
       <directionalLight position={[2, 3, 4]} intensity={2.2} color="#fff3d0" />
       <pointLight position={[-3, 1, 2]} intensity={1.4} color="#7fd0ef" />
-      <pointLight position={[0, -2, 3]} intensity={0.8} color="#f0d97a" />
+      <pointLight position={[0, -2, 3]} intensity={0.8} color="#dde4ef" />
       <spotLight position={[0, 4, 1]} intensity={1.2} angle={0.6} color="#ffffff" />
       <CrownModel />
     </Canvas>

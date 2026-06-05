@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "@/styles/Countdown.module.css";
 
-const TARGET = new Date("2027-02-06T20:00:00");
+const TARGET = new Date("2027-02-06T19:30:00");
 
 function getTimeLeft() {
   const diff = TARGET.getTime() - Date.now();

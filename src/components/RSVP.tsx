@@ -16,15 +16,19 @@ function waLink(message: string) {
 }
 
 export default function RSVP() {
-  const [guests, setGuests] = useState(1);
+  const [guests, setGuests] = useState(2);
+  const [name, setName] = useState("");
   const { playSfx } = useAudio();
 
+  const who = name.trim() || "______";
+
   const confirmMsg =
-    `¡Hola! Confirmo mi asistencia a los XV años de ${HONOREE} 🩵\n` +
+    `¡Hola! Soy ${who} 🩵\n` +
+    `Confirmo mi asistencia a los XV años de ${HONOREE}.\n` +
     `Asistiremos ${guests} ${guests === 1 ? "persona" : "personas"}. ¡Gracias por la invitación!`;
 
   const declineMsg =
-    `¡Hola! Lamento mucho no poder asistir a los XV años de ${HONOREE}. ` +
+    `¡Hola! Soy ${who}. Lamento mucho no poder asistir a los XV años de ${HONOREE}. ` +
     `Les deseo una noche maravillosa 🩵`;
 
   return (
@@ -35,10 +39,31 @@ export default function RSVP() {
         </div>
         <p className="eyebrow">Confirma tu lugar</p>
         <h2 className={`${styles.heading} gold-text`}>¿Nos acompañas?</h2>
-        <p className={styles.text}>
-          Tu presencia es el mejor regalo. Ayúdanos a preparar cada detalle
-          confirmando si nos acompañarás en esta noche tan especial.
+
+        <p className={styles.reserved}>
+          Hemos reservado <strong>2 lugares</strong> para ti ✦
         </p>
+
+        <p className={styles.text}>
+          Escribe tu nombre y confirma si nos acompañarás en esta noche tan
+          especial.
+        </p>
+
+        <div className={styles.field}>
+          <label className={styles.fieldLabel} htmlFor="rsvp-name">
+            Tu nombre
+          </label>
+          <input
+            id="rsvp-name"
+            type="text"
+            className={styles.input}
+            placeholder="Nombre y apellido"
+            value={name}
+            maxLength={60}
+            autoComplete="name"
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
 
         <div className={styles.counter}>
           <span className={styles.counterLabel}>Asistentes</span>
@@ -61,7 +86,7 @@ export default function RSVP() {
               aria-label="Agregar un asistente"
               onClick={() => {
                 playSfx("hover");
-                setGuests((g) => Math.min(20, g + 1));
+                setGuests((g) => Math.min(2, g + 1));
               }}
             >
               +

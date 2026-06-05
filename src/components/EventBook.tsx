@@ -92,8 +92,8 @@ export default function EventBook() {
           </div>
 
           {/* Hojas que se voltean (de la más abajo a la portada) */}
-          <Leaf rotate={ry3} z={37} front={<InfoPage label="Lugar" value="Salón Azul" sub="Te esperamos" />} />
-          <Leaf rotate={ry2} z={38} front={<InfoPage label="Recepción" value="8:00 p. m." sub="Puntualidad mágica" />} />
+          <Leaf rotate={ry3} z={37} front={<InfoPage label="Lugar" value="Trattoria Piccolo Mondo" sub="Piso 2 · Guayaquil – Ecuador" />} />
+          <Leaf rotate={ry2} z={38} front={<InfoPage label="Recepción" value="7:30 p. m." sub="Puntualidad mágica ✦" />} />
           <Leaf rotate={ry1} z={39} front={<InfoPage label="Fecha" value="6 de febrero, 2027" sub="Sábado" />} />
           <Leaf
             rotate={ry0}

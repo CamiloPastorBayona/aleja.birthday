@@ -10,14 +10,14 @@
   --celeste-light: #d6eef8;
   --celeste-dark: #5bafd6;
   --celeste-deep: #2e86c1;
-  --midnight: #071a30;
-  --midnight-2: #0c2a47;
-  --midnight-3: #103a63;
+  --midnight: #0a2238;
+  --midnight-2: #103257;
+  --midnight-3: #15467a;
 
-  /* Dorado */
-  --gold: #d4af37;
-  --gold-light: #f0d97a;
-  --gold-glow: rgba(212, 175, 55, 0.55);
+  /* Plateado (antes dorado) */
+  --gold: #aab3c3;
+  --gold-light: #dde4ef;
+  --gold-glow: rgba(190, 205, 228, 0.55);
 
   --white: #ffffff;
   --off-white: #f4f9ff;
@@ -48,10 +48,10 @@ body {
   /* Fondo único y homogéneo para todo el sitio (sin cortes entre secciones).
      Un degradado vertical muy suave + un resplandor tenue arriba al centro. */
   background:
-    radial-gradient(120% 70% at 50% -15%, rgba(46, 134, 193, 0.16), transparent 55%),
-    linear-gradient(180deg, #061528 0%, #07203a 45%, #061a30 100%);
+    radial-gradient(120% 70% at 50% -15%, rgba(91, 175, 214, 0.22), transparent 55%),
+    linear-gradient(180deg, #0a2238 0%, #103257 45%, #0b2742 100%);
   background-attachment: fixed;
-  background-color: #061528;
+  background-color: #0a2238;
   color: var(--text-dark);
   font-family: var(--font-serif), Georgia, serif;
   overflow-x: clip;
@@ -78,9 +78,9 @@ main {
   color: var(--gold-light);
 }
 
-/* Texto con degradado dorado */
+/* Texto con degradado plateado */
 .gold-text {
-  background: linear-gradient(120deg, #f7e9a8 0%, #d4af37 45%, #f0d97a 70%, #b8860b 100%);
+  background: linear-gradient(120deg, #f2f5fa 0%, #aab3c3 42%, #dde4ef 68%, #8c96a7 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -126,7 +126,7 @@ main {
 }
 
 ::selection {
-  background: rgba(212, 175, 55, 0.35);
+  background: rgba(170, 179, 195, 0.35);
   color: #fff;
 }
 

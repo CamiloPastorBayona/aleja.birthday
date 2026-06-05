@@ -8,8 +8,8 @@ import type { SVGProps } from "react";
 
 type Art = SVGProps<SVGSVGElement>;
 
-const GOLD = "#d4af37";
-const GOLD_L = "#f0d97a";
+const GOLD = "#aab3c3";
+const GOLD_L = "#dde4ef";
 
 /* Destellos de estrella esparcidos (4 puntas) en coordenadas dadas. */
 function Twinkles({
@@ -50,7 +50,7 @@ export function Carriage({ className, ...rest }: Art) {
         <linearGradient id="carGold" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor={GOLD_L} />
           <stop offset="50%" stopColor={GOLD} />
-          <stop offset="100%" stopColor="#b8860b" />
+          <stop offset="100%" stopColor="#8c96a7" />
         </linearGradient>
         <radialGradient id="carWin" cx="50%" cy="40%" r="60%">
           <stop offset="0%" stopColor="rgba(255,255,255,0.55)" />
@@ -79,7 +79,7 @@ export function Carriage({ className, ...rest }: Art) {
             );
           })}
           <circle cx={cx} cy={190} r={6.5} fill="url(#carGold)" />
-          <circle cx={cx} cy={190} r={2.5} fill="#fff7e0" />
+          <circle cx={cx} cy={190} r={2.5} fill="#f6f9ff" />
         </g>
       ))}
 
@@ -122,7 +122,7 @@ export function Carriage({ className, ...rest }: Art) {
       <ellipse cx="180" cy="118" rx="33" ry="39" stroke="url(#carGold)" strokeWidth={0.8} opacity={0.6} />
       <path d="M150 96 Q180 108 210 96" stroke="url(#carGold)" strokeWidth={1.4} opacity={0.7} />
       {/* silueta de princesa insinuada */}
-      <path d="M180 150 Q168 140 172 124 Q176 112 180 112 Q184 112 188 124 Q192 140 180 150Z" fill="rgba(240,217,122,0.3)" />
+      <path d="M180 150 Q168 140 172 124 Q176 112 180 112 Q184 112 188 124 Q192 140 180 150Z" fill="rgba(221,228,239,0.3)" />
       <circle cx="180" cy="108" r="6" fill="rgba(255,247,224,0.5)" />
 
       {/* corona superior con joya */}
@@ -161,7 +161,7 @@ export function GlassSlipper({ className, ...rest }: Art) {
       </defs>
 
       {/* sombra en el piso */}
-      <ellipse cx="98" cy="120" rx="80" ry="6" fill="rgba(212,175,55,0.15)" />
+      <ellipse cx="98" cy="120" rx="80" ry="6" fill="rgba(170,179,195,0.15)" />
 
       {/* tacón de aguja */}
       <path
@@ -233,8 +233,8 @@ export function Castle({ className, ...rest }: Art) {
           <stop offset="100%" stopColor={GOLD} />
         </linearGradient>
         <radialGradient id="casWin" cx="50%" cy="40%" r="60%">
-          <stop offset="0%" stopColor="rgba(240,217,122,0.85)" />
-          <stop offset="100%" stopColor="rgba(212,175,55,0.3)" />
+          <stop offset="0%" stopColor="rgba(221,228,239,0.85)" />
+          <stop offset="100%" stopColor="rgba(170,179,195,0.3)" />
         </radialGradient>
       </defs>
 
@@ -266,7 +266,7 @@ export function Castle({ className, ...rest }: Art) {
       ))}
 
       {/* portón ojival */}
-      <path d="M142 262 V214 Q160 192 178 214 V262Z" fill="rgba(212,175,55,0.22)" stroke="url(#casGold)" strokeWidth={1.6} />
+      <path d="M142 262 V214 Q160 192 178 214 V262Z" fill="rgba(170,179,195,0.22)" stroke="url(#casGold)" strokeWidth={1.6} />
       <line x1="160" y1="200" x2="160" y2="262" stroke="url(#casGold)" strokeWidth={0.8} opacity={0.6} />
 
       {/* ventanas iluminadas */}
@@ -331,7 +331,7 @@ export function MidnightClock({ className, ...rest }: Art) {
 
       {/* péndulo */}
       <line x1="85" y1="122" x2="85" y2="150" stroke="url(#clkGold)" strokeWidth={1.4} />
-      <circle cx="85" cy="152" r="9" fill="rgba(240,217,122,0.4)" stroke="url(#clkGold)" strokeWidth={1.6} />
+      <circle cx="85" cy="152" r="9" fill="rgba(221,228,239,0.4)" stroke="url(#clkGold)" strokeWidth={1.6} />
       <circle cx="85" cy="152" r="4" fill={GOLD_L} opacity={0.7} />
 
       {/* base con patas */}
@@ -354,21 +354,21 @@ export function MagicWand({ className, ...rest }: Art) {
           <stop offset="100%" stopColor={GOLD_L} />
         </linearGradient>
         <radialGradient id="wandGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="rgba(246,231,168,0.9)" />
-          <stop offset="100%" stopColor="rgba(246,231,168,0)" />
+          <stop offset="0%" stopColor="rgba(240,243,248,0.9)" />
+          <stop offset="100%" stopColor="rgba(240,243,248,0)" />
         </radialGradient>
       </defs>
       <line x1="22" y1="106" x2="74" y2="54" stroke="url(#wandGold)" strokeWidth={4.5} strokeLinecap="round" />
-      <line x1="22" y1="106" x2="74" y2="54" stroke="#fff7e0" strokeWidth={1.4} strokeLinecap="round" opacity={0.6} />
+      <line x1="22" y1="106" x2="74" y2="54" stroke="#f6f9ff" strokeWidth={1.4} strokeLinecap="round" opacity={0.6} />
       <circle cx="84" cy="42" r="26" fill="url(#wandGlow)" />
       <g transform="translate(84,42)">
         <path
           d="M0 -20 L6 -6 L20 -6 L9 4 L13 19 L0 10 L-13 19 L-9 4 L-20 -6 L-6 -6 Z"
           fill="url(#wandGold)"
-          stroke="#fff7e0"
+          stroke="#f6f9ff"
           strokeWidth={0.8}
         />
-        <circle r="3" fill="#fff7e0" />
+        <circle r="3" fill="#f6f9ff" />
       </g>
       <Twinkles points={[[104, 22, 5], [60, 40, 3.5], [92, 64, 3.5], [108, 50, 2.6], [44, 70, 3]]} />
     </svg>
@@ -391,7 +391,7 @@ export function Tiara({ className, ...rest }: Art) {
       </defs>
       <path
         d="M20 92 Q26 52 44 66 Q56 30 76 62 Q92 18 108 58 Q124 18 140 62 Q160 30 172 66 Q190 52 196 92 Z"
-        fill="rgba(212,175,55,0.16)"
+        fill="rgba(170,179,195,0.16)"
         stroke="url(#tiara)"
         strokeWidth={2.6}
         strokeLinejoin="round"
@@ -405,7 +405,7 @@ export function Tiara({ className, ...rest }: Art) {
       {/* banda inferior con perlas */}
       <rect x="18" y="92" width="178" height="6" rx="3" fill="url(#tiara)" />
       {Array.from({ length: 9 }).map((_, i) => (
-        <circle key={i} cx={28 + i * 20} cy={104} r={3} fill="#fff7e0" />
+        <circle key={i} cx={28 + i * 20} cy={104} r={3} fill="#f6f9ff" />
       ))}
       <Twinkles points={[[108, 30, 5], [55, 50, 3.5], [160, 50, 3.5]]} />
     </svg>
@@ -448,7 +448,7 @@ export function Gown({ className, ...rest }: Art) {
       {/* cinturón con flor */}
       <path d="M68 80 Q85 90 102 80" stroke="url(#gownGold)" strokeWidth={2.6} fill="none" />
       <circle cx="85" cy="84" r="4.5" fill="url(#gownGold)" />
-      <circle cx="85" cy="84" r="1.8" fill="#fff7e0" />
+      <circle cx="85" cy="84" r="1.8" fill="#f6f9ff" />
       <Twinkles points={[[40, 120, 4.5], [130, 120, 4], [85, 200, 3.5], [30, 180, 3]]} />
     </svg>
   );

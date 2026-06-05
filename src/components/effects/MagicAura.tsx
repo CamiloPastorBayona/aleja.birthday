@@ -20,7 +20,7 @@ interface Comet {
   ang: number; rad: number; spd: number; size: number; col: RGB; trail: { x: number; y: number }[];
 }
 
-const GOLD: RGB = [240, 217, 122];
+const GOLD: RGB = [221, 228, 239];
 const WHITE: RGB = [235, 247, 255];
 const CELESTE: RGB = [150, 210, 240];
 const palette: RGB[] = [GOLD, GOLD, WHITE, CELESTE];

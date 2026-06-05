@@ -15,9 +15,13 @@ Nuestra versión replica esa idea pero en celeste/dorado.
 
 ## Datos del evento (confirmados, definitivos)
 - **Festejada:** Kate Alejandra Reyes Tutillo
-- **Fecha:** 6 de febrero de 2027, 20:00
-- **Lugar:** Salón Azul
-- **Familia:** Familia Reyes
+- **Padres:** José Luis Reyes y Raiza Tutillo
+- **Fecha:** 6 de febrero de 2027, recepción 19:30 (7:30 p. m.)
+- **Lugar:** Salón Trattoria Piccolo Mondo, Piso 2, Guayaquil – Ecuador
+  (mapa: https://maps.app.goo.gl/aQFghqWAoDMtEgsX7)
+- **Vestimenta:** Etiqueta / formal de gala. Colores reservados: Lila · Celeste · Plateado
+- **WhatsApp confirmación:** 593967358137 (en `RSVP.tsx`)
+- **Paleta:** celeste + **plateado** (antes dorado); noche un poco más celeste
 
 ## Stack técnico
 - **Next.js 14** (App Router) + **React 18** + **TypeScript**

@@ -69,7 +69,7 @@ function CssFallback({ fade }: { fade: boolean }) {
         opacity: fade ? 1 : 0,
         transition: "opacity 1s ease",
         background:
-          "radial-gradient(circle at 50% 42%, rgba(91,175,214,0.35), transparent 55%), radial-gradient(circle at 50% 42%, rgba(212,175,55,0.18), transparent 40%)",
+          "radial-gradient(circle at 50% 42%, rgba(91,175,214,0.35), transparent 55%), radial-gradient(circle at 50% 42%, rgba(170,179,195,0.18), transparent 40%)",
       }}
     />
   );

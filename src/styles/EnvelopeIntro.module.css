@@ -16,7 +16,7 @@
   width: min(80vw, 560px);
   height: min(80vw, 560px);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.16), transparent 60%);
+  background: radial-gradient(circle, rgba(170, 179, 195, 0.16), transparent 60%);
   animation: pulse 4s ease-in-out infinite;
   pointer-events: none;
 }
@@ -78,7 +78,7 @@
   height: 84%;
   border-radius: 12px;
   background: linear-gradient(160deg, #f7fbff, #e2eef7);
-  border: 1px solid rgba(212, 175, 55, 0.5);
+  border: 1px solid rgba(170, 179, 195, 0.5);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
@@ -91,7 +91,7 @@
 .letterMono {
   font-family: var(--font-script), cursive;
   font-size: clamp(2.2rem, 8vw, 3.4rem);
-  color: #b8860b;
+  color: #8c96a7;
   line-height: 1;
 }
 
@@ -174,7 +174,7 @@
   font-family: var(--font-script), cursive;
   font-size: clamp(1.6rem, 6vw, 2.2rem);
   color: var(--gold-light);
-  text-shadow: 0 0 18px rgba(212, 175, 55, 0.4);
+  text-shadow: 0 0 18px rgba(170, 179, 195, 0.4);
   animation: breathe 2.4s ease-in-out infinite;
 }
 .promptSub {

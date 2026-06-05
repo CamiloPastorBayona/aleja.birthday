@@ -10,7 +10,7 @@
   width: clamp(110px, 28vw, 168px);
   aspect-ratio: 360 / 643;
   margin: 0 auto 1.2rem;
-  filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.3));
+  filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 16px rgba(170, 179, 195, 0.3));
   animation: floatClock 5s ease-in-out infinite;
 }
 

@@ -19,7 +19,7 @@
   /* Muy sutil: solo un brillo dorado arriba. Sin oscurecer los bordes para
      que el fondo siga viéndose continuo con el resto de la página. */
   background:
-    radial-gradient(ellipse 60% 40% at 50% 8%, rgba(212, 175, 55, 0.1), transparent 60%);
+    radial-gradient(ellipse 60% 40% at 50% 8%, rgba(170, 179, 195, 0.1), transparent 60%);
 }
 
 /* ── Corona 3D arriba ── */
@@ -32,7 +32,7 @@
   height: clamp(140px, 30vw, 220px);
   z-index: 3;
   pointer-events: none;
-  filter: drop-shadow(0 6px 22px rgba(212, 175, 55, 0.45));
+  filter: drop-shadow(0 6px 22px rgba(170, 179, 195, 0.45));
 }
 
 /* Castillo de fondo COMPLETO (torre visible), anclado abajo con cielo arriba */
@@ -111,14 +111,14 @@
   font-size: clamp(6rem, 22vw, 13rem);
   letter-spacing: 0.04em;
   line-height: 0.9;
-  filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.55));
+  filter: drop-shadow(0 0 40px rgba(170, 179, 195, 0.55));
 }
 
 .anos {
   font-family: var(--font-script), cursive;
   font-size: clamp(2.6rem, 9vw, 5rem);
   color: var(--white);
-  text-shadow: 0 0 28px rgba(212, 175, 55, 0.5);
+  text-shadow: 0 0 28px rgba(170, 179, 195, 0.5);
   margin-top: -0.6rem;
 }
 
@@ -137,21 +137,22 @@
   font-family: var(--font-script), cursive;
   font-size: clamp(2.6rem, 8vw, 4.6rem);
   color: var(--gold-light);
-  text-shadow: 0 0 26px rgba(212, 175, 55, 0.45);
+  text-shadow: 0 0 26px rgba(170, 179, 195, 0.45);
   line-height: 1.22;
   padding: 0.06em 0.16em 0.14em;
 }
 
 .lastname {
   font-family: var(--font-sans), sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(0.85rem, 2.6vw, 1.15rem);
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--gold-light);
   letter-spacing: 0.42em;
   text-transform: uppercase;
   margin-top: 0.4rem;
   margin-bottom: 1.8rem;
   padding-left: 0.42em;
+  text-shadow: 0 0 16px rgba(190, 205, 228, 0.4);
 }
 
 .date {
@@ -160,12 +161,12 @@
   font-size: clamp(0.85rem, 2.2vw, 1.1rem);
   color: var(--gold-light);
   letter-spacing: 0.28em;
-  border: 1px solid rgba(212, 175, 55, 0.5);
+  border: 1px solid rgba(170, 179, 195, 0.5);
   display: inline-block;
   padding: 0.6rem 1.6rem;
   border-radius: 999px;
   background: rgba(7, 26, 48, 0.4);
   backdrop-filter: blur(8px);
-  box-shadow: 0 0 24px rgba(212, 175, 55, 0.15);
+  box-shadow: 0 0 24px rgba(170, 179, 195, 0.15);
 }
 

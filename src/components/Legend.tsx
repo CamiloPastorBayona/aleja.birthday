@@ -13,11 +13,18 @@ import { motion, useScroll, useTransform, type MotionValue } from "framer-motion
 import styles from "@/styles/Legend.module.css";
 
 const beats: { text: string; gold?: boolean }[] = [
-  { text: "Hay historias que parecen escritas en un cuento…" },
-  { text: "Y la de Kate Alejandra es una de ellas.", gold: true },
-  { text: "Desde niña soñó con su gran noche: luces, vals y un castillo de ensueño." },
-  { text: "El reloj está por marcar el inicio de su capítulo más esperado." },
-  { text: "Y queremos que seas parte de esta noche mágica.", gold: true },
+  { text: "Hay momentos que se viven una sola vez en la vida…" },
+  { text: "y este es uno de ellos.", gold: true },
+  {
+    text:
+      "Nosotros, José Luis Reyes y Raiza Tutillo, con el corazón lleno de alegría, queremos compartir contigo un día que soñamos durante mucho tiempo.",
+  },
+  { text: "Celebramos los XV años de nuestra hija, Kate Alejandra.", gold: true },
+  {
+    text:
+      "Será una noche de cuento, con luces, música y recuerdos que deseamos vivir junto a las personas que más queremos.",
+  },
+  { text: "Y queremos que tú seas parte de ella.", gold: true },
 ];
 
 function Beat({
