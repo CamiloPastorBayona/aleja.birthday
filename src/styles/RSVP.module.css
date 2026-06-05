@@ -52,14 +52,21 @@
   font-weight: 600;
 }
 
+.fields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.4rem 0 0.2rem;
+}
 .field {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  margin: 1.4rem auto 0.4rem;
   width: 100%;
   max-width: 340px;
+  margin: 0 auto;
 }
 .fieldLabel {
   font-family: var(--font-sans), sans-serif;
@@ -149,14 +156,23 @@
 .confirmBtn,
 .declineBtn {
   display: inline-block;
+  width: 100%;
   padding: 1rem 1.4rem;
   border-radius: 999px;
+  border: none;
   font-family: var(--font-sans), sans-serif;
+  font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.04em;
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.25s var(--ease-out), box-shadow 0.3s, filter 0.3s;
+}
+.confirmBtn:disabled,
+.declineBtn:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
 }
 
 .confirmBtn {
@@ -180,6 +196,33 @@
   color: var(--white);
   border-color: rgba(168, 216, 234, 0.6);
   transform: translateY(-2px);
+}
+
+.error {
+  margin-top: 0.9rem;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.9rem;
+  color: #ffd2d2;
+}
+
+/* Mensaje de agradecimiento tras enviar */
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.6rem 0.5rem;
+}
+.successIcon {
+  font-size: 2.6rem;
+  filter: drop-shadow(0 0 14px rgba(190, 205, 228, 0.5));
+}
+.successText {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(1.1rem, 3vw, 1.35rem);
+  line-height: 1.7;
+  color: var(--text-dark);
+  max-width: 26ch;
 }
 
 .giftTitle {

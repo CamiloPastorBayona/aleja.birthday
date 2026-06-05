@@ -4,53 +4,70 @@ import Image from "next/image";
 import { useAudio } from "@/components/audio/AudioProvider";
 import styles from "@/styles/RSVP.module.css";
 
-// ─────────────────────────────────────────────────────────────
-// CONFIGURA AQUÍ tu número de WhatsApp (formato internacional,
-// sin "+", sin espacios). Ej. Colombia: 57 + número.
-const WHATSAPP_NUMBER = "593967358137";
-const HONOREE = "Kate Alejandra";
 // URL del Web App de Google Apps Script (registra las confirmaciones en el Sheet)
 const SHEET_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbx-LLamL9PD4lrByD7Ck9FZvbDlnmouCuL7iGY1kLOHD-3zcqDg1EIXyBNvOUwaXO8Dyg/exec";
-// ─────────────────────────────────────────────────────────────
 
-function waLink(message: string) {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-}
-
-// Registra la respuesta en el Google Sheet (fire-and-forget, sin bloquear).
-function registrarEnSheet(data: {
-  nombre: string;
-  asistentes: number;
-  estado: string;
-}) {
-  try {
-    fetch(SHEET_SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(data),
-    }).catch(() => {});
-  } catch {
-    /* sin conexión: no pasa nada, igual abre WhatsApp */
-  }
-}
+type Estado = "Confirmado" | "No asiste";
 
 export default function RSVP() {
   const [guests, setGuests] = useState(2);
-  const [name, setName] = useState("");
+  const [names, setNames] = useState(["", ""]);
+  const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
+  const [estadoFinal, setEstadoFinal] = useState<Estado>("Confirmado");
+  const [error, setError] = useState("");
   const { playSfx } = useAudio();
 
-  const who = name.trim() || "______";
+  const setName = (i: number, v: string) =>
+    setNames((prev) => {
+      const n = [...prev];
+      n[i] = v;
+      return n;
+    });
 
-  const confirmMsg =
-    `¡Hola! Soy ${who} 🩵\n` +
-    `Confirmo mi asistencia a los XV años de ${HONOREE}.\n` +
-    `Asistiremos ${guests} ${guests === 1 ? "persona" : "personas"}. ¡Gracias por la invitación!`;
+  const enviar = async (estado: Estado) => {
+    setError("");
+    const requeridos = estado === "Confirmado" ? guests : 1;
+    const completos = names.slice(0, requeridos).every((n) => n.trim());
+    if (!completos) {
+      setError(
+        estado === "Confirmado"
+          ? "Por favor escribe el nombre de cada asistente."
+          : "Por favor escribe tu nombre."
+      );
+      return;
+    }
 
-  const declineMsg =
-    `¡Hola! Soy ${who}. Lamento mucho no poder asistir a los XV años de ${HONOREE}. ` +
-    `Les deseo una noche maravillosa 🩵`;
+    playSfx(estado === "Confirmado" ? "sparkle" : "click");
+    setStatus("sending");
+
+    const nombre =
+      estado === "Confirmado"
+        ? names
+            .slice(0, guests)
+            .map((n) => n.trim())
+            .filter(Boolean)
+            .join(" · ")
+        : names[0].trim();
+
+    try {
+      await fetch(SHEET_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          nombre,
+          asistentes: estado === "Confirmado" ? guests : 0,
+          estado,
+        }),
+      });
+    } catch {
+      /* aunque falle la red, mostramos el agradecimiento */
+    }
+
+    setEstadoFinal(estado);
+    setStatus("done");
+  };
 
   return (
     <section className={styles.section} id="rsvp">
@@ -61,87 +78,98 @@ export default function RSVP() {
         <p className="eyebrow">Confirma tu lugar</p>
         <h2 className={`${styles.heading} gold-text`}>¿Nos acompañas?</h2>
 
-        <p className={styles.reserved}>
-          Hemos reservado <strong>2 lugares</strong> para ti ✦
-        </p>
-
-        <p className={styles.text}>
-          Escribe tu nombre y confirma si nos acompañarás en esta noche tan
-          especial.
-        </p>
-
-        <div className={styles.field}>
-          <label className={styles.fieldLabel} htmlFor="rsvp-name">
-            Tu nombre
-          </label>
-          <input
-            id="rsvp-name"
-            type="text"
-            className={styles.input}
-            placeholder="Nombre y apellido"
-            value={name}
-            maxLength={60}
-            autoComplete="name"
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-
-        <div className={styles.counter}>
-          <span className={styles.counterLabel}>Asistentes</span>
-          <div className={styles.counterControls}>
-            <button
-              type="button"
-              className={styles.counterBtn}
-              aria-label="Quitar un asistente"
-              onClick={() => {
-                playSfx("hover");
-                setGuests((g) => Math.max(1, g - 1));
-              }}
-            >
-              −
-            </button>
-            <span className={styles.counterValue}>{guests}</span>
-            <button
-              type="button"
-              className={styles.counterBtn}
-              aria-label="Agregar un asistente"
-              onClick={() => {
-                playSfx("hover");
-                setGuests((g) => Math.min(2, g + 1));
-              }}
-            >
-              +
-            </button>
+        {status === "done" ? (
+          <div className={styles.success}>
+            <span className={styles.successIcon}>
+              {estadoFinal === "Confirmado" ? "🩵" : "💌"}
+            </span>
+            <p className={styles.successText}>
+              {estadoFinal === "Confirmado"
+                ? "¡Gracias! Tu asistencia quedó registrada. Nos vemos en la fiesta ✦"
+                : "Gracias por avisarnos con cariño. Te vamos a extrañar 🩵"}
+            </p>
           </div>
-        </div>
+        ) : (
+          <>
+            <p className={styles.reserved}>
+              Hemos reservado <strong>2 lugares</strong> para ti ✦
+            </p>
+            <p className={styles.text}>
+              Indica cuántos asistirán y escribe sus nombres para confirmar.
+            </p>
 
-        <div className={styles.actions}>
-          <a
-            className={styles.confirmBtn}
-            href={waLink(confirmMsg)}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => {
-              playSfx("sparkle");
-              registrarEnSheet({ nombre: who, asistentes: guests, estado: "Confirmado" });
-            }}
-            onMouseEnter={() => playSfx("hover")}
-          >
-            ✓ Confirmar por WhatsApp
-          </a>
-          <a
-            className={styles.declineBtn}
-            href={waLink(declineMsg)}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => {
-              playSfx("click");
-              registrarEnSheet({ nombre: who, asistentes: 0, estado: "No asiste" });
-            }}
-          >
-            No podré asistir
-          </a>
-        </div>
+            <div className={styles.counter}>
+              <span className={styles.counterLabel}>Asistentes</span>
+              <div className={styles.counterControls}>
+                <button
+                  type="button"
+                  className={styles.counterBtn}
+                  aria-label="Quitar un asistente"
+                  onClick={() => {
+                    playSfx("hover");
+                    setGuests((g) => Math.max(1, g - 1));
+                  }}
+                >
+                  −
+                </button>
+                <span className={styles.counterValue}>{guests}</span>
+                <button
+                  type="button"
+                  className={styles.counterBtn}
+                  aria-label="Agregar un asistente"
+                  onClick={() => {
+                    playSfx("hover");
+                    setGuests((g) => Math.min(2, g + 1));
+                  }}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div className={styles.fields}>
+              {Array.from({ length: guests }).map((_, i) => (
+                <div key={i} className={styles.field}>
+                  <label className={styles.fieldLabel} htmlFor={`rsvp-name-${i}`}>
+                    {guests === 1 ? "Tu nombre" : `Invitado ${i + 1}`}
+                  </label>
+                  <input
+                    id={`rsvp-name-${i}`}
+                    type="text"
+                    className={styles.input}
+                    placeholder="Nombre y apellido"
+                    value={names[i]}
+                    maxLength={60}
+                    autoComplete="name"
+                    onChange={(e) => setName(i, e.target.value)}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {error && <p className={styles.error}>{error}</p>}
+
+            <div className={styles.actions}>
+              <button
+                type="button"
+                className={styles.confirmBtn}
+                disabled={status === "sending"}
+                onClick={() => enviar("Confirmado")}
+                onMouseEnter={() => playSfx("hover")}
+              >
+                {status === "sending" ? "Enviando…" : "✓ Confirmar asistencia"}
+              </button>
+              <button
+                type="button"
+                className={styles.declineBtn}
+                disabled={status === "sending"}
+                onClick={() => enviar("No asiste")}
+              >
+                No podré asistir
+              </button>
+            </div>
+          </>
+        )}
 
         <div className="divider-gold" />
 
