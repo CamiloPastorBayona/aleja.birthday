@@ -45,17 +45,24 @@ html {
 }
 
 body {
-  /* Fondo único y homogéneo para todo el sitio (sin cortes entre secciones).
-     Un degradado vertical muy suave + un resplandor tenue arriba al centro. */
-  background:
-    radial-gradient(130% 85% at 50% -8%, rgba(168, 216, 234, 0.4), transparent 55%),
-    linear-gradient(180deg, #1c6296 0%, #2a82bd 48%, #185a8a 100%);
-  background-attachment: fixed;
   background-color: #1c6296;
   color: var(--text-dark);
   font-family: var(--font-serif), Georgia, serif;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Fondo único y CONTINUO detrás de todo, en una capa fija real.
+   (Evita los cortes/bandas que produce background-attachment: fixed en móvil.) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(130% 85% at 50% -6%, rgba(168, 216, 234, 0.4), transparent 55%),
+    linear-gradient(180deg, #1c6296 0%, #2a82bd 48%, #185a8a 100%);
 }
 
 main {
