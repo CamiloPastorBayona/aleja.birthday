@@ -67,11 +67,10 @@ export default function EventBook() {
     offset: ["start start", "end end"],
   });
 
-  // 4 giros de página: portada→Fecha→Recepción→Lugar→Vestimenta
-  const ry0 = useTransform(scrollYProgress, [0.08, 0.26], [0, -160]);
-  const ry1 = useTransform(scrollYProgress, [0.29, 0.47], [0, -160]);
-  const ry2 = useTransform(scrollYProgress, [0.5, 0.68], [0, -160]);
-  const ry3 = useTransform(scrollYProgress, [0.71, 0.89], [0, -160]);
+  // 3 giros de página: portada→Fecha→Recepción→Vestimenta
+  const ry0 = useTransform(scrollYProgress, [0.08, 0.3], [0, -160]);
+  const ry1 = useTransform(scrollYProgress, [0.36, 0.58], [0, -160]);
+  const ry2 = useTransform(scrollYProgress, [0.64, 0.86], [0, -160]);
 
   const hintOpacity = useTransform(scrollYProgress, [0, 0.06, 0.18], [1, 1, 0]);
 
@@ -92,7 +91,6 @@ export default function EventBook() {
           </div>
 
           {/* Hojas que se voltean (de la más abajo a la portada) */}
-          <Leaf rotate={ry3} z={37} front={<InfoPage label="Lugar" value="Trattoria Piccolo Mondo" sub="Piso 2 · Guayaquil – Ecuador" />} />
           <Leaf rotate={ry2} z={38} front={<InfoPage label="Recepción" value="7:30 p. m." sub="Puntualidad mágica ✦" />} />
           <Leaf rotate={ry1} z={39} front={<InfoPage label="Fecha" value="6 de febrero, 2027" sub="Sábado" />} />
           <Leaf
