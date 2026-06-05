@@ -9,10 +9,31 @@ import styles from "@/styles/RSVP.module.css";
 // sin "+", sin espacios). Ej. Colombia: 57 + número.
 const WHATSAPP_NUMBER = "593967358137";
 const HONOREE = "Kate Alejandra";
+// URL del Web App de Google Apps Script (registra las confirmaciones en el Sheet)
+const SHEET_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbx-LLamL9PD4lrByD7Ck9FZvbDlnmouCuL7iGY1kLOHD-3zcqDg1EIXyBNvOUwaXO8Dyg/exec";
 // ─────────────────────────────────────────────────────────────
 
 function waLink(message: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+// Registra la respuesta en el Google Sheet (fire-and-forget, sin bloquear).
+function registrarEnSheet(data: {
+  nombre: string;
+  asistentes: number;
+  estado: string;
+}) {
+  try {
+    fetch(SHEET_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(data),
+    }).catch(() => {});
+  } catch {
+    /* sin conexión: no pasa nada, igual abre WhatsApp */
+  }
 }
 
 export default function RSVP() {
@@ -100,7 +121,10 @@ export default function RSVP() {
             href={waLink(confirmMsg)}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => playSfx("sparkle")}
+            onClick={() => {
+              playSfx("sparkle");
+              registrarEnSheet({ nombre: who, asistentes: guests, estado: "Confirmado" });
+            }}
             onMouseEnter={() => playSfx("hover")}
           >
             ✓ Confirmar por WhatsApp
@@ -110,7 +134,10 @@ export default function RSVP() {
             href={waLink(declineMsg)}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => playSfx("click")}
+            onClick={() => {
+              playSfx("click");
+              registrarEnSheet({ nombre: who, asistentes: 0, estado: "No asiste" });
+            }}
           >
             No podré asistir
           </a>

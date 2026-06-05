@@ -10,9 +10,9 @@
   --celeste-light: #d6eef8;
   --celeste-dark: #5bafd6;
   --celeste-deep: #2e86c1;
-  --midnight: #0a2238;
-  --midnight-2: #103257;
-  --midnight-3: #15467a;
+  --midnight: #1c6296;
+  --midnight-2: #2a82bd;
+  --midnight-3: #3a97d2;
 
   /* Plateado (antes dorado) */
   --gold: #aab3c3;
@@ -48,10 +48,10 @@ body {
   /* Fondo único y homogéneo para todo el sitio (sin cortes entre secciones).
      Un degradado vertical muy suave + un resplandor tenue arriba al centro. */
   background:
-    radial-gradient(120% 70% at 50% -15%, rgba(91, 175, 214, 0.22), transparent 55%),
-    linear-gradient(180deg, #0a2238 0%, #103257 45%, #0b2742 100%);
+    radial-gradient(130% 85% at 50% -8%, rgba(168, 216, 234, 0.4), transparent 55%),
+    linear-gradient(180deg, #1c6296 0%, #2a82bd 48%, #185a8a 100%);
   background-attachment: fixed;
-  background-color: #0a2238;
+  background-color: #1c6296;
   color: var(--text-dark);
   font-family: var(--font-serif), Georgia, serif;
   overflow-x: clip;

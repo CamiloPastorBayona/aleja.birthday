@@ -4,10 +4,10 @@
   z-index: 9999;
   display: grid;
   place-items: center;
-  /* Mismo fondo que la web para que la transición sea continua */
+  /* Mismo fondo celeste que la web para que la transición sea continua */
   background:
-    radial-gradient(120% 70% at 50% 30%, rgba(46, 134, 193, 0.2), transparent 55%),
-    linear-gradient(180deg, #061528 0%, #07203a 50%, #061a30 100%);
+    radial-gradient(130% 85% at 50% 30%, rgba(168, 216, 234, 0.35), transparent 55%),
+    linear-gradient(180deg, #1c6296 0%, #2a82bd 50%, #185a8a 100%);
   padding: 1.5rem;
 }
 
