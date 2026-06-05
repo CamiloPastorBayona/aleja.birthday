@@ -6,7 +6,7 @@ import styles from "@/styles/RSVP.module.css";
 
 // URL del Web App de Google Apps Script (registra las confirmaciones en el Sheet)
 const SHEET_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbx-LLamL9PD4lrByD7Ck9FZvbDlnmouCuL7iGY1kLOHD-3zcqDg1EIXyBNvOUwaXO8Dyg/exec";
+  "https://script.google.com/macros/s/AKfycbzojefL1YJEpX_3DLP4sOeHRUzhWp5FbUjmicv8h6aAXkOAISWnDZipKdQtmFY64x1VDg/exec";
 
 type Estado = "Confirmado" | "No asiste";
 
